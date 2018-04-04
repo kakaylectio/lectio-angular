@@ -1,0 +1,33 @@
+div.prodname {
+#	font-family: 'Arial';
+	font-size: small;
+	color: grey;
+}
+
+html {
+	background-color: mediumaquamarine;
+}
+
+h1 {
+	font-family: 'Satisfy';
+	margin-top: 2%;
+}
+
+mat-card {
+	margin-left: 30px;
+	margin-bottom: 1%;
+	max-width: 800px;
+}
+
+mat-card-title {
+	font-weight: bold;
+}
+
+mat-card-subtitle {
+	font-size: smaller;
+}
+
+mat-card-content {
+	line-height: 1.5;
+	font-size: medium;
+}
