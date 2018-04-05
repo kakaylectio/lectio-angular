@@ -14,12 +14,16 @@ import { MatDividerModule} from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
 import { LectioBackendService } from './lectio-backend.service';
 import { ArrayToDatePipe } from './util/array-to-date.pipe';
+import { LoginService } from './login.service';
+import { TokenInterceptor } from './token.interceptor';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     LessonComponent,
     LessonlistComponent,
-    ArrayToDatePipe
+    ArrayToDatePipe,
+    HomeComponent
     
   ],
   imports: [
@@ -35,7 +39,8 @@ import { ArrayToDatePipe } from './util/array-to-date.pipe';
 	    HttpClientModule,
  ],
   providers: [
-	  LectioBackendService
+	  LectioBackendService,
+	  LoginService
   ],
   bootstrap: [AppComponent]
 })
