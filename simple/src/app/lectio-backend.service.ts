@@ -29,6 +29,7 @@ export class LectioBackendService {
   	
   	
     tokenEncodedString = this.loginService.getToken();
+    console.log("tokenEncodedString is " + tokenEncodedString);
     
     var httpOptions = {headers:  new HttpHeaders ({
     	'Content-Type': 'application/json',

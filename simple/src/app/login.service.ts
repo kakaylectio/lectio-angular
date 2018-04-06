@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+
 
 class EmailPassword{
 	  public email: string;
@@ -35,7 +38,16 @@ export class LoginService {
 	  return token;
   }
   
+  private handleError(error: HttpErrorResponse) {
+	  console.log("Handling problem.")
+	  if (error.status == 401) {
+		  console.log("Clearing token.");
+		  localStorage.removeItem('token');
+		  return new ErrorObservable("Login failed.");
+	  }
 
+	  return new ErrorObservable("Error from http ${error.error}");
+  }
 
   public login(email: string, password: string): Observable<LoginResponse> {
 	   var emailPassword : EmailPassword;
@@ -47,10 +59,15 @@ export class LoginService {
 	  	observable =  this.httpClient.post<LoginResponse>(this.configUrl + '/login', emailPassword);
 	  	console.log("About to subscribe.");
 	  	observable.subscribe(loginResponse => {
+	  				console.log("Response received.");
 	  				if (loginResponse) {
+	  					console.log("Storing token.");
 	  					localStorage.setItem('token', loginResponse.token);
 	  				}
 	  		});
+	  	observable.pipe(
+	  		      catchError(this.handleError)
+	  	    );;
 	  	return observable;
 	  }
 
