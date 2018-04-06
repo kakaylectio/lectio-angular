@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { User } from './model/user';
 
 
 class EmailPassword{
@@ -15,6 +16,7 @@ class LoginResponse{
 	public token: string;
 	public name: string;
     public expiration: string;
+	public userId: number;
 }
 
 
@@ -22,11 +24,11 @@ class LoginResponse{
 export class LoginService {
 	  
   private configUrl: string;
-  
+  private user: User;
 
   constructor(private httpClient: HttpClient) { 
 	  this.configUrl = 'http://localhost:8888';
-	  
+	  this.user = null;
   }
   
   getToken(): string {
@@ -43,6 +45,7 @@ export class LoginService {
 	  if (error.status == 401) {
 		  console.log("Clearing token.");
 		  localStorage.removeItem('token');
+		  this.user = null;
 		  return new ErrorObservable("Login failed.");
 	  }
 
@@ -63,6 +66,10 @@ export class LoginService {
 	  				if (loginResponse) {
 	  					console.log("Storing token.");
 	  					localStorage.setItem('token', loginResponse.token);
+	  					this.user = new User();
+	  					this.user.name = loginResponse.name;
+	  					this.user.email = email;
+	  					this.user.id = loginResponse.userId;
 	  				}
 	  		});
 	  	observable.pipe(

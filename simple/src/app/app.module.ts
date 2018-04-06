@@ -17,14 +17,17 @@ import { ArrayToDatePipe } from './util/array-to-date.pipe';
 import { LoginService } from './login.service';
 import { TokenInterceptor } from './token.interceptor';
 import { HomeComponent } from './home/home.component';
+import { TrialComponent } from './trial/trial.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 @NgModule({
   declarations: [
     AppComponent,
     LessonComponent,
     LessonlistComponent,
     ArrayToDatePipe,
-    HomeComponent
-    
+    HomeComponent,
+    TrialComponent,
   ],
   imports: [
 	    BrowserModule,
@@ -37,6 +40,8 @@ import { HomeComponent } from './home/home.component';
 	    AppRoutingModule,
 	    // import HttpClientModule after BrowserModule.
 	    HttpClientModule,
+	    ReactiveFormsModule,
+	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
  ],
   providers: [
 	  LectioBackendService,
