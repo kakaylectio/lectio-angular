@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { TrialComponent } from './trial/trial.component';
 const routes: Routes = [
 	{ path: 'trial', component: TrialComponent },
-	{ path: 'lessons', component: LessonComponent },
+	{ path: 'lessons/:notebookId', component: LessonComponent },
 	{ path: 'lessonlist', component: LessonlistComponent },
 	{ path: '', component: HomeComponent },
 	{ path: '**', redirectTo: '' },

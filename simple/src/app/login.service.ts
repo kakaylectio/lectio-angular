@@ -25,13 +25,44 @@ export class LoginService {
 	  
   private configUrl: string;
   private user: User;
+  private httpHeaders: HttpHeaders;
 
   constructor(private httpClient: HttpClient) { 
 	  this.configUrl = 'http://localhost:8888';
+	  
+	  let username = localStorage.getItem('username');
+	  let userid = localStorage.getItem('userid');
 	  this.user = null;
+
+	  if (username != null && userid != null)  {
+		  this.user = new User();
+		  this.user.name = username;
+		  this.user.id = parseInt(userid);
+	  }
+	  let token = this.getToken();
+	  if (token == null) {
+	  	this.httpHeaders = new HttpHeaders();
+	  }
+	  else {
+		  this.httpHeaders = new HttpHeaders({
+				  	'Content-Type': 'application/json',
+				  	'Authorization': 'Token ' + token
+		  });
+		  
+	  }
+	  	
   }
   
-  getToken(): string {
+  getHttpHeaders() : HttpHeaders  {
+	  return this.httpHeaders;
+  }
+  
+  
+  getUser(): User {
+	  return this.user;
+  }
+  
+  private getToken(): string {
 	  var token : string;
 	  token = localStorage.getItem('token');
 	  
@@ -52,7 +83,7 @@ export class LoginService {
 	  return new ErrorObservable("Error from http ${error.error}");
   }
 
-  public login(email: string, password: string): Observable<LoginResponse> {
+  public login(email: string, password: string, callback:(this: void, userParam: User) => void): Observable<LoginResponse> {
 	   var emailPassword : EmailPassword;
        emailPassword = new EmailPassword();
    		emailPassword.email = email;
@@ -64,18 +95,42 @@ export class LoginService {
 	  	observable.subscribe(loginResponse => {
 	  				console.log("Response received.");
 	  				if (loginResponse) {
-	  					console.log("Storing token.");
-	  					localStorage.setItem('token', loginResponse.token);
-	  					this.user = new User();
-	  					this.user.name = loginResponse.name;
+	  					this.setupUser(loginResponse);
 	  					this.user.email = email;
-	  					this.user.id = loginResponse.userId;
+	  					callback(this.user);
 	  				}
-	  		});
-	  	observable.pipe(
-	  		      catchError(this.handleError)
-	  	    );;
+	  			},
+	  			error => {
+					console.log("Error logging in.", error.error);
+					this.handleError(error);
+				}
+	  	)
 	  	return observable;
 	  }
+  
+  setupUser (loginResponse: LoginResponse) :void{
+	  if (loginResponse == null) {
+		  localStorage.removeItem('token');
+		  this.user = null;
+		  this.httpHeaders = new HttpHeaders();
+	  }
+	  else {
+			console.log("Storing token.");
+			localStorage.setItem('token', loginResponse.token);
+			localStorage.setItem('username', loginResponse.name);
+			localStorage.setItem('userid', "" + loginResponse.userId);
+			this.user = new User();
+			this.user.name = loginResponse.name;
+			this.user.id = loginResponse.userId;
+			this.httpHeaders = new HttpHeaders(
+					{
+					  	'Content-Type': 'application/json',
+					  	'Authorization': 'Token ' + loginResponse.token
+					 });
+			console.log("loginResponse.userId = " + loginResponse.userId);
+			console.log("user.id = " + this.user.id);
+	  }
+  }
+		  
 
 }

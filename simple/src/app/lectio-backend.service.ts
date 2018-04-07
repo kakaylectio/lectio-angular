@@ -12,30 +12,27 @@ export class LectioBackendService {
 	username: string;
 	password: string;
 
-	
-
+ 
   constructor(private httpClient: HttpClient, private loginService: LoginService) {
 	  this.configUrl = 'http://localhost:8888';
-	  this.path = '/lectio/notebook/371/activetopics/withlessons';
 	  this.username = 'aral@vorkosigan.com';
 	  this.password = 'cordelia';
   }
   
+ getHttpOptions() {
+	 return ({'headers': this.loginService.getHttpHeaders()});
+ } 
   
+  getUserNotebooks():Observable<NotebookRep[]> {
+	  let userId = this.loginService.getUser().id;
+	  let path = '/lectio/user/' + userId + '/notebooks';
+	  let httpOptions = {'headers':this.loginService.getHttpHeaders()};
+	  return this.httpClient.get<NotebookRep[]>(this.configUrl + path, this.getHttpOptions());
+  }
   
 
-  getActiveTopicsWithLessons(): Observable<NotebookRep> {
-    var tokenEncodedString: string;
-  	
-  	
-    tokenEncodedString = this.loginService.getToken();
-    console.log("tokenEncodedString is " + tokenEncodedString);
-    
-    var httpOptions = {headers:  new HttpHeaders ({
-    	'Content-Type': 'application/json',
-//    	'Authorization': 'Basic ' + encodedString,
-    	'Authorization': 'Token ' + tokenEncodedString
-    	})};
-  	return this.httpClient.get<NotebookRep>(this.configUrl + this.path, httpOptions);
+  getActiveTopicsWithLessons(notebookId: number): Observable<NotebookRep> {
+  	   let path = '/lectio/notebook/' + notebookId + '/activetopics/withlessons';
+  	   return this.httpClient.get<NotebookRep>(this.configUrl + path, this.getHttpOptions());
   }
 }
