@@ -1,61 +1,11 @@
-<div class="prodname">
-	Lectio
-	</div>
-	<h1 class="notebook-title" *ngIf="notebook">{{notebook.name}}</h1>
+<div class="prodname">Lectio</div>
+<h1 class="notebook-title" *ngIf="notebook">{{notebook.name}}</h1>
 
-	<mat-card *ngFor="let topic of topicList"> 
-	  <mat-card-header> 
-	     <mat-card-title>{{topic.name}}</mat-card-title> 
-	     <mat-card-subtitle *ngIf="topic.lastLessonNote"><span>{{topic.lastLessonNote.date |  arrayToDate | date}}</span></mat-card-subtitle> 
-	   </mat-card-header> 
-	   <mat-card-content *ngIf="topic.lastLessonNote" [innerHTML]="topic.lastLessonNote.content">
-	   </mat-card-content> 
-	 </mat-card>
+<mat-card *ngFor="let topic of topicList"> 
+	<mat-card-content>
+		<app-lesson-editor [topic]="topic"></app-lesson-editor>
+	</mat-card-content>
+</mat-card>
 
-	<mat-card> <mat-card-header> <mat-card-title>Mendelssohn
-	Songs Without Words Opus 19 No. 1</mat-card-title> <mat-card-subtitle>26
-	Feb 2018</mat-card-subtitle> </mat-card-header> <mat-card-content>
-	<ol>
-		<li>Work on pedal and play LH bass and tenor alone</li>
-		<li>Pedal + alto + tenor + bass, making sure the inner voices are
-			very light / muted/ soft fingers. Watch out for _*thumb* _accents</li>
-		<li>Tempo: Play faster once you get a good control of inner
-			voices. Leave out rubato for now</li>
-		<li>Intro 2 measures: Think of a shimmery / glistening picture</li>
-	</ol>
-	</mat-card-content> </mat-card>
 
-	<mat-card> <mat-card-header> <mat-card-title>Mozart
-	Sonata in C K. 545 Movement 3</mat-card-title> <mat-card-subtitle> 5
-	March 2018</mat-card-subtitle> </mat-card-header> <mat-card-content>
-	<ul>
-		<li>Be more open to "playful" practicing</li>
-		<li>Land - means really let go on the keyboard</li>
-		<li>m. 44-48 LH needs phrasing and bring out (D E F E D - C B A)</li>
-		<li>mm 51 Crescendo: end loud!</li>
-		<li>mm 61-67 LH only support RH the same way RH is playing</li>
-		<li>mm 68 - end: don't start soft.</li>
-		<li>Rotate and drop wrist</li>
-	</ul>
-	</mat-card-content> </mat-card>
 
-	<mat-card> <mat-card-header> <mat-card-title>Technique
-	2018</mat-card-title> <mat-card-subtitle> 5 March 2018</mat-card-subtitle> </mat-card-header> <mat-card-content>
-	D-major
-	<ul>
-		<li>2 octave, octave scales</li>
-		<li>3rds/10ths: legato 4 octave scale</li>
-		<li>Arpeggio and inversions</li>
-		<li>Arpeggio V7 and inversions</li>
-	</ul>
-	</mat-card-content> </mat-card>
-
-	<mat-card> <mat-card-header> <mat-card-title>Schubert
-	Moments Musicaux Opus 39 No. 3</mat-card-title> <mat-card-subtitle>
-	5 March 2018</mat-card-subtitle> </mat-card-header> <mat-card-content>
-	<ul>
-		<li>Quarternote = 92. Stay with this new tempo and fix today's
-			notes</li>
-
-	</ul>
-	</mat-card-content> </mat-card>

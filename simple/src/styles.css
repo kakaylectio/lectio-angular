@@ -3,5 +3,9 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/icon?family=Roboto');
 @import url('https://fonts.googleapis.com/icon?family=Satisfy');
+@import "../node_modules/froala-editor/css/froala_editor.pkgd.min.css";
+@import  "../node_modules/froala-editor/css/froala_style.min.css";
+@import  "../node_modules/font-awesome/css/font-awesome.css";
 
+@import "./lectioeditor-theme.css";
 

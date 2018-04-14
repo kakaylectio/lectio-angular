@@ -1,3 +1,4 @@
+import { Lesson } from '../model/lesson';
 
 export class Topic {
   id: number;
@@ -6,5 +7,5 @@ export class Topic {
   activeOrder: number;
   dateCreated: string;
   graphic: string;
-
+  lastLessonNote: Lesson;
 }

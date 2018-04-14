@@ -20,6 +20,14 @@ import { HomeComponent } from './home/home.component';
 import { TrialComponent } from './trial/trial.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import {MatIconModule} from '@angular/material/icon';
+import {MatIconRegistry} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { CKEditorModule } from 'ng2-ckeditor';
+import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +36,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ArrayToDatePipe,
     HomeComponent,
     TrialComponent,
+    LessonEditorComponent,
   ],
   imports: [
 	    BrowserModule,
@@ -36,12 +45,15 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 	    MatCardModule,
 	    MatListModule,
 	    MatDividerModule,
+	    MatIconModule,
+	    MatButtonModule,
 	    BrowserAnimationsModule,
 	    AppRoutingModule,
 	    // import HttpClientModule after BrowserModule.
 	    HttpClientModule,
 	    ReactiveFormsModule,
-	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
+	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+	    FlexLayoutModule
  ],
   providers: [
 	  LectioBackendService,

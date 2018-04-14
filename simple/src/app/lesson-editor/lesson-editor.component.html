@@ -1,0 +1,25 @@
+<div class="lesson-editor" fxLayout="column">
+	<div class="card-header" fxLayout="row" fxFill>
+		<div class="topicname" fxFlex>{{topic.name}}</div>
+		<button mat-button class="newlessonnote"  fxFlex="8" matToolTip="New Note" >
+			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
+		</button>
+	</div>
+	
+	<div class="editsection" *ngIf="editingLesson">
+		<div class="lesson-note-date" *ngIf="editingLesson.date">
+			<span>{{topiclesson.editingLesson.date | arrayToDate | date}}</span>
+		</div>
+		<div class="lesson-note-date" *ngIf="!editingLesson.date">
+			<span>Today</span>
+		</div>
+		<div [froalaEditor]="listOptions" [(froalaModel)]="editingLesson.content" ></div>
+	</div>
+	<div *ngIf="lastLesson">
+		<mat-card-subtitle class="lesson-note-date" *ngIf="lastLesson.date">
+			<span>{{lastLesson.date | arrayToDate | date}}</span>
+		</mat-card-subtitle>
+	</div>
+	<div *ngIf="lastLesson"
+		[innerHTML]="lastLesson.content"></div>
+</div>

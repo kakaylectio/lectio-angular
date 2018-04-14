@@ -5,20 +5,39 @@ import { LectioBackendService } from '../lectio-backend.service';
 import { NotebookRep } from '../model/notebookrep';
 import { Notebook } from '../model/notebook';
 import { Topic } from '../model/topic';
+import { Lesson } from '../model/lesson';
 import { DatePipe } from '@angular/common';
 import { Router,ActivatedRoute  } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { TopicLesson } from './topiclesson';
 
 @Component({
   selector: 'app-lesson',
   templateUrl: './lesson.component.html',
   styleUrls: ['./lesson.component.css']
 })
+
+
+
 export class LessonComponent implements OnInit {
-  
-  private notebookData : String;
+  private notebookData : string;
   private notebook : Notebook;
   private topicList : Topic[];
-  constructor(private lectioBackendService: LectioBackendService, private route:  ActivatedRoute ) { }
+  private topicLessonList : TopicLesson[];
+
+  
+  constructor(private lectioBackendService: LectioBackendService, 
+		  private route:  ActivatedRoute, 
+		  iconRegistry: MatIconRegistry, 
+		  sanitizer: DomSanitizer
+		  ) {
+	  iconRegistry.registerFontClassAlias('fontawesome', 'fa');
+
+  }
 
   
   ngOnInit() {
@@ -39,7 +58,7 @@ export class LessonComponent implements OnInit {
 	  			var notebookRep : NotebookRep = response;
 	  			console.log(notebookRep);
 	  			this.notebook = notebookRep.notebook;
-	  			this.topicList = notebookRep.topicList;		
+	  			this.topicList = notebookRep.topicList;	
 	  		},
 	  		error => {
 	  			console.log("Error getting active topics with lessons. " + JSON.stringify(error.error));

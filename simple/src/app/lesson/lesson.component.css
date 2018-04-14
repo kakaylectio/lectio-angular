@@ -13,14 +13,20 @@ h1 {
 	margin-top: 2%;
 }
 
+mat-icon {
+	font-size: medium;
+	style: regular;
+}
 mat-card {
 	margin-left: 30px;
-	margin-bottom: 1%;
+	margin-bottom: 3%;
 	max-width: 800px;
 }
 
+
+
 mat-card-title {
-	font-weight: bold;
+	#font-weight: bold;
 }
 
 mat-card-subtitle {
@@ -31,3 +37,8 @@ mat-card-content {
 	line-height: 1.5;
 	font-size: medium;
 }
+
+.editsection {
+	margin-bottom: 30px;
+}
+
