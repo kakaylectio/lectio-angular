@@ -54,6 +54,15 @@ export class LessonEditorComponent implements OnInit {
 		  // TODO:  Get second to last lesson.
 		  this.lastLesson = undefined;
 		  this.isStaticLessonVisible = false;
+		  this.lectioBackendService.findLessonBefore(this.topic.id, this.editingLesson.id).subscribe(
+				  data => {
+					this.lastLesson = data;  
+				  },
+				  error => {
+					  console.log("Error getting lesson before " + this.editingLesson.id);
+				  }
+		  );
+	  
 	  }
 	  else {
 		  // Do nothing.  This is all set up.  EditingLesson is undefined, and

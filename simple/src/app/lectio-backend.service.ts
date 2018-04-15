@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NotebookRep } from './model/notebookrep';
 import { LoginService } from './login.service';
@@ -21,13 +21,14 @@ export class LectioBackendService {
   }
   
  getHttpOptions() {
-	 return ({'headers': this.loginService.getHttpHeaders()});
+	 let options = {};
+	 options['headers'] = this.loginService.getHttpHeaders();
+	 return (options);
  } 
   
   getUserNotebooks():Observable<NotebookRep[]> {
 	  let userId = this.loginService.getUser().id;
 	  let path = '/lectio/user/' + userId + '/notebooks';
-	  let httpOptions = {'headers':this.loginService.getHttpHeaders()};
 	  return this.httpClient.get<NotebookRep[]>(this.configUrl + path, this.getHttpOptions());
   }
   
@@ -47,5 +48,14 @@ export class LectioBackendService {
  	   return this.httpClient.post<Lesson>(this.configUrl + path, {'content': content}, this.getHttpOptions());
   }
   
+  // Topic ID is the topic to which the lesson belongs.
+  // Lesson ID is the lesson right after the one that you're searching for.
+  findLessonBefore(topicId: number, lessonId: number): Observable<Lesson> {
+	  let path = '/lectio/topic/' + topicId + "/findlessonnote";
+	  let httpOptions = this.getHttpOptions();
+	  let query = new HttpParams().set('afterid',lessonId);
+	  httpOptions['params'] =  query;
+	  return this.httpClient.get<Lesson>(this.configUrl + path, httpOptions);
+  }
   
 }
