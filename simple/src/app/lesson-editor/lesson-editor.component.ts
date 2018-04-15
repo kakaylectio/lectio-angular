@@ -45,15 +45,18 @@ export class LessonEditorComponent implements OnInit {
 	  }
 	  else if (currentTime.getFullYear() == this.lastLesson.date[0]
 	  		&& currentTime.getMonth()+1 == this.lastLesson.date[1]
-	  		&& currentTime.getDay() == this.lastLesson.date[2]) {
+	  		&& currentTime.getDate() == this.lastLesson.date[2]) {
+		  console.log("Last lesson was today's lesson.  So keep it in editing mode.");
 		  // Last lesson was edited today.  Don't create a new lesson and
 		  // keep editing today's lesson.
 		  this.editingLesson = this.lastLesson;
+		  this.editingContent = this.lastLesson.content;
 		  // TODO:  Get second to last lesson.
+		  this.lastLesson = undefined;
 		  this.isStaticLessonVisible = false;
 	  }
 	  else {
-		  // Do nothing.  This is all set up.  EditinLesson is undefined, and
+		  // Do nothing.  This is all set up.  EditingLesson is undefined, and
 		  // last lesson is the last lesson on the topic.
 	  }
 	  

@@ -39,16 +39,12 @@ export class LectioBackendService {
   
   createLesson(topicId: number, content: string): Observable<Lesson> {
  	   let path = '/lectio/topic/' + topicId + '/createlessonnote';
-// 	   let lessonNoteContent = {};
-// 	   lessonNoteContent['content'] = content;
  	   return this.httpClient.post<Lesson>(this.configUrl + path, {'content': content}, this.getHttpOptions());
   }
   
   updateLesson(lessonId: number, content: string): Observable<Lesson> {
-	   let path = '/lectio/lessonnote/' + lessonId + '/updatelessonnote';
- 	   let lessonNoteContent = [];
- 	   lessonNoteContent['content'] = content;
- 	   return this.httpClient.post<Lesson>(this.configUrl + path, lessonNoteContent, this.getHttpOptions());
+	   let path = '/lectio/lessonnote/' + lessonId + '/updatecontent';
+ 	   return this.httpClient.post<Lesson>(this.configUrl + path, {'content': content}, this.getHttpOptions());
   }
   
   

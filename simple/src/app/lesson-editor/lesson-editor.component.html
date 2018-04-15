@@ -8,7 +8,7 @@
 	
 	<div class="editsection" *ngIf="editingLesson">
 		<div class="lesson-note-date" *ngIf="editingLesson.date">
-			<span>{{topiclesson.editingLesson.date | arrayToDate | date}}</span>
+			<span>{{editingLesson.date | arrayToDate | date}}</span>
 		</div>
 		<div class="lesson-note-date" *ngIf="!editingLesson.date">
 			<span>Today</span>
