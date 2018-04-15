@@ -13,7 +13,6 @@ import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { TopicLesson } from './topiclesson';
 
 @Component({
   selector: 'app-lesson',
@@ -27,7 +26,7 @@ export class LessonComponent implements OnInit {
   private notebookData : string;
   private notebook : Notebook;
   private topicList : Topic[];
-  private topicLessonList : TopicLesson[];
+  
 
   
   constructor(private lectioBackendService: LectioBackendService, 
@@ -56,7 +55,6 @@ export class LessonComponent implements OnInit {
 	  	.subscribe(response => 
 	  		{
 	  			var notebookRep : NotebookRep = response;
-	  			console.log(notebookRep);
 	  			this.notebook = notebookRep.notebook;
 	  			this.topicList = notebookRep.topicList;	
 	  		},
