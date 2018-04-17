@@ -4,4 +4,5 @@ import { Topic } from './topic';
 export class NotebookRep {
   notebook: Notebook;
   topicList: Topic[];
+  userRole: string;
 }

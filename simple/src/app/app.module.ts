@@ -24,7 +24,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatIconRegistry} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { CKEditorModule } from 'ng2-ckeditor';
 import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
 
 

@@ -3,6 +3,7 @@ import { Lesson } from '../model/lesson';
 import { Topic } from '../model/topic';
 import {LectioBackendService } from '../lectio-backend.service';
 import {MatButtonModule} from '@angular/material/button';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @Component({
   selector: 'app-lesson-editor',
@@ -28,7 +29,7 @@ export class LessonEditorComponent implements OnInit {
   private isStaticLessonVisible : boolean;
   private editingContent : string;
   
-  constructor( private lectioBackendService : LectioBackendService ) {
+  constructor( private lectioBackendService : LectioBackendService , private froalaEditorModule : FroalaEditorModule) {
 	  
   }
 
@@ -72,8 +73,9 @@ export class LessonEditorComponent implements OnInit {
 	  
   }
   
-  public listOptions: Object = {
+  public froalaOptions: Object = {
 			htmlAllowedTags: ['ol','ul','li', 'p'] ,
+			enter: 'ENTER_BR',
 			toolbarButtons: ['formatOL', 'formatUL'],
 			toolbarInline: true,
 			toolbarVisibleWithoutSelection: true,

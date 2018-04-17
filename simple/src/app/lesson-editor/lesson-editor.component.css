@@ -1,8 +1,36 @@
 mat-icon {
-	font-size: medium;
+	font-size: small;
 	style: regular;
 }
 
+div.topicname {
+	font-size: large;
+}
+
+div.lesson-note-date {
+	font-size:  small;
+	font-color: lightgray;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
 .editsection {
+	vertical-align: top;
 	margin-bottom: 10px;
+}
+
+div.editarea {
+	background: #ffffffff;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 10px;
+}
+.card-header {
+	padding-bottom: 5px;
+}
+
+.lastlessoncontent {
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left:10px;
 }

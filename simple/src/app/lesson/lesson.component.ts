@@ -5,13 +5,9 @@ import { LectioBackendService } from '../lectio-backend.service';
 import { NotebookRep } from '../model/notebookrep';
 import { Notebook } from '../model/notebook';
 import { Topic } from '../model/topic';
-import { Lesson } from '../model/lesson';
-import { DatePipe } from '@angular/common';
 import { Router,ActivatedRoute  } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {MatIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @Component({
@@ -21,18 +17,19 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 })
 
 
-
+// LessonComponent contains the listing of all active topics
+// and their last lesson in a notebook.  This is where lessons can be added to a topic.
 export class LessonComponent implements OnInit {
   private notebookData : string;
   private notebook : Notebook;
   private topicList : Topic[];
+  private role : string;
   
 
   
   constructor(private lectioBackendService: LectioBackendService, 
 		  private route:  ActivatedRoute, 
 		  iconRegistry: MatIconRegistry, 
-		  sanitizer: DomSanitizer
 		  ) {
 	  iconRegistry.registerFontClassAlias('fontawesome', 'fa');
 
@@ -57,6 +54,8 @@ export class LessonComponent implements OnInit {
 	  			var notebookRep : NotebookRep = response;
 	  			this.notebook = notebookRep.notebook;
 	  			this.topicList = notebookRep.topicList;	
+	  			this.role = notebookRep.userRole;
+	  			console.log("Role = " + this.role);
 	  		},
 	  		error => {
 	  			console.log("Error getting active topics with lessons. " + JSON.stringify(error.error));

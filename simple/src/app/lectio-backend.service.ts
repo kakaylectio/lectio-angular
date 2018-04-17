@@ -53,7 +53,7 @@ export class LectioBackendService {
   findLessonBefore(topicId: number, lessonId: number): Observable<Lesson> {
 	  let path = '/lectio/topic/' + topicId + "/findlessonnote";
 	  let httpOptions = this.getHttpOptions();
-	  let query = new HttpParams().set('afterid',lessonId);
+	  let query = new HttpParams().set('afterid',lessonId.toString());
 	  httpOptions['params'] =  query;
 	  return this.httpClient.get<Lesson>(this.configUrl + path, httpOptions);
   }

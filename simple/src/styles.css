@@ -9,3 +9,6 @@
 
 @import "./lectioeditor-theme.css";
 
+body {
+	background: lightsteelblue;
+}

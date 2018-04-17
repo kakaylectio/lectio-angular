@@ -4,9 +4,7 @@ div.prodname {
 	color: grey;
 }
 
-html {
-	background-color: mediumaquamarine;
-}
+
 
 h1 {
 	font-family: 'Satisfy';
@@ -18,9 +16,10 @@ mat-icon {
 	style: regular;
 }
 mat-card {
-	margin-left: 30px;
-	margin-bottom: 3%;
+	margin-left: 1rem;
+	margin-bottom: 0.5rem;
 	max-width: 800px;
+	background-color: #ffffff88; 
 }
 
 
@@ -38,7 +37,4 @@ mat-card-content {
 	font-size: medium;
 }
 
-.editsection {
-	margin-bottom: 30px;
-}
 

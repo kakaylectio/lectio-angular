@@ -7,35 +7,37 @@
 	</div>
 	
 	<div class="editsection" *ngIf="editingLesson">
-		<div class="lesson-note-date" *ngIf="editingLesson.date">
-			<span>{{editingLesson.date | arrayToDate | date}}</span>
+		<div class="lesson-heading" fxLayout="row" fxFill fxLayoutAlign=" end">
+			<div class="lesson-note-date" *ngIf="editingLesson.date">
+				<span>{{editingLesson.date | arrayToDate | date}}</span>
+			</div>
 		</div>
 		<div class="lesson-note-date" *ngIf="!editingLesson.date">
 			<span>Today</span>
 		</div>
-		<div [froalaEditor]="listOptions" [(froalaModel)]="editingContent" ></div>
+		<div class="editarea" [froalaEditor]="froalaOptions" [(froalaModel)]="editingContent" ></div>
 	</div>
-	<div *ngIf="isStaticLessonVisible && lastLesson" >
-		<div class="lesson-heading" fxLayout="row" fxFill >
+	<div *ngIf="isStaticLessonVisible && lastLesson" fxLayout="column">
+		<div class="lesson-heading" fxLayout="row" fxFill fxLayoutAlign=" end">
 			<div  class="lesson-note-date" *ngIf="lastLesson.date" fxFlex>
 				<span>{{lastLesson.date | arrayToDate | date}}</span>
 			</div>
-			<button mat-icon-button *ngIf="editingLesson" fxFlex="8" matToolTip="Hide last lesson" (click)="collapseButtonClicked();"
+			<button mat-icon-button *ngIf="editingLesson" fxFlex="nogrow" matToolTip="Hide last lesson" (click)="collapseButtonClicked();"
 			    aria-label="Hide this lesson">
 				<mat-icon fontSet="fa" fontIcon="fa-minus"  aria-hidden="true"></mat-icon>
 			</button>
 		</div>
-		<div 
-			[innerHTML]="lastLesson.content">
+		<div class="lastlessoncontent"
+			[innerHTML]="lastLesson.content" fxFlexAlign="baseline">
 		</div>
 	</div>
-	<div *ngIf="!isStaticLessonVisible && lastLesson" >
+	<div *ngIf="!isStaticLessonVisible && lastLesson" fxLayout="column" >
 		<div class="lesson-heading" fxLayout="row" fxFill >
 			<div  class="lesson-note-date" fxFlex>
 			</div>
 			<button mat-icon-button *ngIf="editingLesson" fxFlex="8" matToolTip="Show last lesson" (click)="expandButtonClicked();"
 			    aria-label="Hide this lesson">
-				<mat-icon fontSet="fa" fontIcon="fa-plus"  aria-hidden="true"></mat-icon>
+				<mat-icon fontSet="fa" fontIcon="fa-plus"  aria-hidden="true" fxFlexAlign=" baseline"></mat-icon>
 			</button>
 		</div>
 	</div> 
