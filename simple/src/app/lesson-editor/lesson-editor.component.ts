@@ -24,6 +24,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 export class LessonEditorComponent implements OnInit {
 
   @Input() topic : Topic;
+  @Input() role : string;
   private editingLesson : Lesson;
   private lastLesson : Lesson;
   private isStaticLessonVisible : boolean;
@@ -38,13 +39,15 @@ export class LessonEditorComponent implements OnInit {
 	  this.lastLesson = this.topic.lastLessonNote;
 	  let currentTime = new Date(); // currentTime month is zero-based.
 
+	  console.log("lesson-editor role = " + this.role);
 	  // If this is completely new topic and last lesson doesn't exist yet, then
 	  // create an editinglesson.
-	  if (!this.lastLesson) {
+	  if (!this.lastLesson && this.role == "teacher") {
 		  this.editingLesson = new Lesson();
 		  this.editingLesson.content == "";
 	  }
-	  else if (currentTime.getFullYear() == this.lastLesson.date[0]
+	  else if (this.role == "teacher" 
+		    && currentTime.getFullYear() == this.lastLesson.date[0]
 	  		&& currentTime.getMonth()+1 == this.lastLesson.date[1]
 	  		&& currentTime.getDate() == this.lastLesson.date[2]) {
 		  console.log("Last lesson was today's lesson.  So keep it in editing mode.");
@@ -135,10 +138,10 @@ export class LessonEditorComponent implements OnInit {
   // Edit button clicked.  This means a new lesson note needs to be created.
   public editButtonClicked () : void {
 	  console.log("New!");
-	  if (this.editingLesson) {
+	  if (this.editingLesson || this.role != "teacher") {
 		  console.log("Oops.  You weren't supposed to see the editing button.");
 	  }
-	  else {
+	  else if (this.role == "teacher"){
 		  this.editingContent="";
 		  this.editingLesson = new Lesson();
 		  this.editingLesson.content=this.editingContent;

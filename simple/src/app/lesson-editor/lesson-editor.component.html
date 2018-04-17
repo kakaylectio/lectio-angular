@@ -1,7 +1,7 @@
 <div class="lesson-editor" fxLayout="column">
 	<div class="card-header" fxLayout="row" fxFill>
 		<div class="topicname" fxFlex>{{topic.name}}</div>
-		<button mat-icon-button *ngIf="!editingLesson" fxFlex="8" matToolTip="New Note" (click)="editButtonClicked();">
+		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'" fxFlex="8" matToolTip="New Note" (click)="editButtonClicked();">
 			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
 		</button>
 	</div>

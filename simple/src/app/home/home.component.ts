@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 	  this.loginService.login('aral@vorkosigan.com', 'cordelia', this.onUserLoggedIn);
+//	  this.loginService.login('miles@dendarii.com', 'naismith', this.onUserLoggedIn);
   }
   
   onUserLoggedIn = (user:User) => 
