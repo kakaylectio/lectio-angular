@@ -7,9 +7,12 @@
 	z-index: 50;
 }
 
+.toolbar {
+}
 
 
 div.lessonlist {
+	padding-top: 20px;
 	margin-left: 0;
 	padding-left: 20px;
 	max-width: 400px;

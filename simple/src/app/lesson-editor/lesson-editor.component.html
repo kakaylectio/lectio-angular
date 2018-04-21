@@ -22,7 +22,7 @@
 			</div>
 			<button mat-icon-button *ngIf="editingLesson" fxFlex="nogrow" matToolTip="Hide last lesson" (click)="collapseButtonClicked();"
 			    aria-label="Hide this lesson">
-				<mat-icon fontSet="fa" fontIcon="fa-minus"  aria-hidden="true"></mat-icon>
+				<mat-icon class="material-icons" >expand_less</mat-icon>
 			</button>
 		</div>
 		<div class="lastlessoncontent"
@@ -35,17 +35,17 @@
 			</div>
 			<button mat-icon-button *ngIf="editingLesson" fxFlex="8" matToolTip="Show last lesson" (click)="expandButtonClicked();"
 			    aria-label="Hide this lesson">
-				<mat-icon fontSet="fa" fontIcon="fa-plus"  aria-hidden="true" fxFlexAlign=" baseline"></mat-icon>
+				<mat-icon class="material-icons" >expand_more</mat-icon>
 			</button>
 		</div>
 	</div> 
 	</mat-card-content>
 	<mat-card-footer fxLayout="row" fxLayoutAlign="end">
 		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'"  matToolTip="New Note" (click)="editButtonClicked();">
-			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
+				<mat-icon class="lesson-action material-icons" >note_add</mat-icon>
 		</button>
 		<button mat-icon-button (click)="historyButtonClicked();" mat-tool-tip="Show History">
-			<mat-icon fontSet="fa" fontIcon="fa-history"></mat-icon>
+				<mat-icon class="lesson-action material-icons" >description</mat-icon>
 		</button>
 	</mat-card-footer>
 </mat-card>

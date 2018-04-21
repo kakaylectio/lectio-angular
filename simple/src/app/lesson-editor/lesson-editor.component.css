@@ -2,10 +2,12 @@
 	
 }
 
-mat-icon {
-	font-size: regular;
-	style: regular;
+mat-icon.lesson-action{
+	font-size: xx-large;
+	color: gray;
 }
+
+
 
 .lesson-editor {
 	margin-bottom: 5px;
