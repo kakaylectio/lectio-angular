@@ -1,6 +1,6 @@
-<div class="lesson-editor" fxLayout="column">
+<mat-card class="lesson-editor" fxLayout="column">
 	<div class="card-header" fxLayout="row" fxFill>
-		<div class="topicname" fxFlex>{{topic.name}}</div>
+		<mat-card-title class="topicname" fxFlex>{{topic.name}}</mat-card-title>
 		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'" fxFlex="8" matToolTip="New Note" (click)="editButtonClicked();">
 			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
 		</button>
@@ -10,10 +10,11 @@
 
 	</div>
 	
+	<mat-card-content>
 	<div class="editsection" *ngIf="editingLesson">
 		<div class="lesson-heading" fxLayout="row" fxFill fxLayoutAlign=" end">
 			<div class="lesson-note-date" *ngIf="editingLesson.date">
-				<span>{{editingLesson.date | arrayToDate | date}}</span>
+				{{editingLesson.date | arrayToDate | date}}
 			</div>
 		</div>
 		<div class="lesson-note-date" *ngIf="!editingLesson.date">
@@ -24,7 +25,7 @@
 	<div *ngIf="isStaticLessonVisible && lastLesson" fxLayout="column">
 		<div class="lesson-heading" fxLayout="row" fxFill fxLayoutAlign=" end">
 			<div  class="lesson-note-date" *ngIf="lastLesson.date" fxFlex>
-				<span>{{lastLesson.date | arrayToDate | date}}</span>
+				{{lastLesson.date | arrayToDate | date}}
 			</div>
 			<button mat-icon-button *ngIf="editingLesson" fxFlex="nogrow" matToolTip="Hide last lesson" (click)="collapseButtonClicked();"
 			    aria-label="Hide this lesson">
@@ -45,4 +46,5 @@
 			</button>
 		</div>
 	</div> 
-</div>
+	</mat-card-content>
+</mat-card>

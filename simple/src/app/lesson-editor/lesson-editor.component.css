@@ -1,15 +1,23 @@
+.lesson-editor {
+	
+}
+
 mat-icon {
-	font-size: small;
+	font-size: regular;
 	style: regular;
 }
 
-div.topicname {
+.lesson-editor {
+	margin-bottom: 5px;
+}
+
+.topicname {
 	font-size: large;
 }
 
 div.lesson-note-date {
 	font-size:  small;
-	font-color: lightgray;
+	font-color: red;
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
@@ -19,11 +27,15 @@ div.lesson-note-date {
 	margin-bottom: 10px;
 }
 
-div.editarea {
+.editarea {
 	background: #ffffffff;
 	margin-top: 0px;
-	padding-top: 0px;
-	padding-left: 10px;
+	padding: 3px;
+	line-height: 1.5;
+	font-size: medium;
+	border-width: 1px;
+	border-style: solid;
+	border-color: lightgray;
 }
 .card-header {
 	padding-bottom: 5px;
@@ -32,5 +44,8 @@ div.editarea {
 .lastlessoncontent {
 	margin-top: 0px;
 	padding-top: 0px;
-	padding-left:10px;
+	padding-left:0px;
+	line-height: 1.5;
+	font-size: medium;
 }
+

@@ -1,11 +1,9 @@
 <div class="prodname">Lectio</div>
 <h1 class="notebook-title" *ngIf="notebook">{{notebook.name}}</h1>
 
-<mat-card class="topic-card" *ngFor="let topic of topicList"> 
-	<mat-card-content>
+<div class="topic-card" *ngFor="let topic of topicList"> 
 		<app-lesson-editor [topic]="topic" [role]="role"></app-lesson-editor>
-	</mat-card-content>
-</mat-card>
+</div>
 
 
 

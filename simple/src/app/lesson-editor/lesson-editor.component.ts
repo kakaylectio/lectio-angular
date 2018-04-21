@@ -55,12 +55,6 @@ export class LessonEditorComponent implements OnInit {
 		    && currentTime.getFullYear() == this.lastLesson.date[0]
 	  		&& currentTime.getMonth()+1 == this.lastLesson.date[1]
 	  		&& currentTime.getDate() == this.lastLesson.date[2]) {
-		  console.log("Last lesson was today's lesson.  So keep it in editing mode.");
-		  console.log("currentTime.getFullYear() = " + currentTime.getFullYear());
-		  console.log("this.lastLesson.date[0] = " + this.lastLesson.date[0]);
-		  console.log("currentTime.getDate() " + currentTime.getDate());
-		  console.log("this.lastLesson.date[2] = " + this.lastLesson.date[2]);
-		  console.log("topic.name = " + this.topic.name);
 		  console.log(this.lastLesson.date);
 		  console.log(this.lastLesson.content);
 		  let pipe = new ArrayToDatePipe();
@@ -69,7 +63,6 @@ export class LessonEditorComponent implements OnInit {
 		  // keep editing today's lesson.
 		  this.editingLesson = this.lastLesson;
 		  this.editingContent = this.lastLesson.content;
-		  // TODO:  Get second to last lesson.
 		  this.lastLesson = undefined;
 		  this.isStaticLessonVisible = false;
 		  this.lectioBackendService.findLessonBefore(this.topic.id, this.editingLesson.id).subscribe(
@@ -98,7 +91,7 @@ export class LessonEditorComponent implements OnInit {
 			toolbarVisibleWithoutSelection: true,
 			quickInsertButtons: ['ol','ul'],
 			theme:  'lectioeditor',
-			placeholderText: 'Enter lesson notes here',
+			placeholderText: 'New notes...',
 			charCounterCount: false,
 			pluginsEnabled: ["align", "draggable", "embedly", "image", "imageManager", "inlineStyle", "lineBreaker", "link", "lists", "paragraphFormat", "url", "wordPaste"],
 			events: {
@@ -121,7 +114,6 @@ export class LessonEditorComponent implements OnInit {
 		  console.log("In creating new lesson, topic ID = " + this.topic.id);
 		  this.lectioBackendService.createLesson(this.topic.id, content).subscribe(
 			  data => {
-				  console.log("Lesson created.");
 				  this.editingLesson.id = data['id'];
 				  this.editingLesson.date = data['date'];
 				  this.editingLesson.content = data['content'];
@@ -132,14 +124,11 @@ export class LessonEditorComponent implements OnInit {
 		  );
 	  }
 	  else if (content) {
-		  console.log("In editing lesson, lesson ID = " + this.editingLesson.id);
 		  this.lectioBackendService.updateLesson(this.editingLesson.id, content).subscribe(
 				  data => {
-					  console.log("Lesson updated.");
 					  this.editingLesson.id = data['id'];
 					  this.editingLesson.date = data['date'];
 					  this.editingLesson.content = data['content'];
-					  console.log("id = " + this.editingLesson.id);
 				  },
 			  	  error => {
 			  		  console.log("Error creating lesson.");
@@ -163,17 +152,14 @@ export class LessonEditorComponent implements OnInit {
   }
 	  
   public collapseButtonClicked() : void {
-	  console.log("Collapse");
 	  this.isStaticLessonVisible = false;
   }
 
   public expandButtonClicked() : void {
-	  console.log("Expand");
 	  this.isStaticLessonVisible = true;
   }
   
   public historyButtonClicked() : void {
-	  console.log("History");
 	  if (this.editingLesson) {
 		  this.topicCacheService.setData(this.topic, this.editingLesson, this.lastLesson );
 	  }
