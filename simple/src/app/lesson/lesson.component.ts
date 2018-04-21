@@ -22,6 +22,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 export class LessonComponent implements OnInit {
   private notebookData : string;
   private notebook : Notebook;
+  private notebookId : number;
   private topicList : Topic[];
   private role : string;
   
@@ -53,14 +54,19 @@ export class LessonComponent implements OnInit {
 	  		{
 	  			var notebookRep : NotebookRep = response;
 	  			this.notebook = notebookRep.notebook;
+	  			this.notebookId = this.notebook.id;
 	  			this.topicList = notebookRep.topicList;	
 	  			this.role = notebookRep.userRole;
-	  			console.log("Role = " + this.role);
+	  			console.log("showTopicsWithLesson received topic list with " + this.topicList.length + " items.");
 	  		},
 	  		error => {
 	  			console.log("Error getting active topics with lessons. " + JSON.stringify(error.error));
 	  		}
 	  	);
+  }
+  
+  rescanTopicList() {
+	  this.showTopicsWithLesson(this.notebookId);
   }
 
 }

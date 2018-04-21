@@ -2,7 +2,7 @@
 <h1 class="notebook-title" *ngIf="notebook">{{notebook.name}}</h1>
 
 <div class="topic-card" *ngFor="let topic of topicList"> 
-		<app-lesson-editor [topic]="topic" [role]="role"></app-lesson-editor>
+		<app-lesson-editor [topic]="topic" [role]="role" [parentView]="this"></app-lesson-editor>
 </div>
 
 

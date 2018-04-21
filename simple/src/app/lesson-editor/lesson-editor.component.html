@@ -44,8 +44,19 @@
 		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'"  matToolTip="New Note" (click)="editButtonClicked();">
 				<mat-icon class="lesson-action material-icons" >note_add</mat-icon>
 		</button>
-		<button mat-icon-button (click)="historyButtonClicked();" mat-tool-tip="Show History">
-				<mat-icon class="lesson-action material-icons" >description</mat-icon>
+		<button mat-icon-button [matMenuTriggerFor]="menu">
+		  <mat-icon>more_vert</mat-icon>
 		</button>
+		<mat-menu #menu="matMenu">
+		  <button mat-menu-item (click)="historyButtonClicked();">
+		    <mat-icon>description</mat-icon>
+		    <span>View all notes</span>
+		  </button>
+		  <button mat-menu-item (click)="archiveButtonClicked();">
+		    <mat-icon>archive</mat-icon>
+		    <span>Archive this topic</span>
+		  </button>
+		</mat-menu>
+
 	</mat-card-footer>
 </mat-card>

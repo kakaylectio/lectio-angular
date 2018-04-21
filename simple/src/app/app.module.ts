@@ -28,6 +28,8 @@ import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
 import { TopicHistoryComponent } from './topic-history/topic-history.component';
 import { TopicCacheService } from './topic-cache.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 	    ReactiveFormsModule,
 	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
 	    FlexLayoutModule,
-	    MatToolbarModule
+	    MatToolbarModule,
+	    MatMenuModule
  ],
   providers: [
 	  LectioBackendService,
