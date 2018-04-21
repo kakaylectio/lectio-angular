@@ -1,14 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatCardModule} from '@angular/material/card';
 import { LectioBackendService } from '../lectio-backend.service';
 import { NotebookRep } from '../model/notebookrep';
 import { Notebook } from '../model/notebook';
 import { Topic } from '../model/topic';
 import { Router,ActivatedRoute  } from '@angular/router';
-import {MatIconModule} from '@angular/material/icon';
-import {MatIconRegistry} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 
 @Component({
   selector: 'app-lesson',
@@ -30,9 +28,7 @@ export class LessonComponent implements OnInit {
   
   constructor(private lectioBackendService: LectioBackendService, 
 		  private route:  ActivatedRoute, 
-		  iconRegistry: MatIconRegistry, 
 		  ) {
-	  iconRegistry.registerFontClassAlias('fontawesome', 'fa');
 
   }
 

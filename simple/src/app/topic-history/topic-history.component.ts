@@ -7,10 +7,8 @@ import { LectioBackendService } from '../lectio-backend.service';
 import { TopicCacheService } from '../topic-cache.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {Location} from '@angular/common';
+import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 
 @Component({
   selector: 'app-topic-history',

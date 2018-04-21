@@ -2,12 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Lesson } from '../model/lesson';
 import { Topic } from '../model/topic';
 import { LectioBackendService } from '../lectio-backend.service';
-import { MatButtonModule} from '@angular/material/button';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { Router } from '@angular/router';
 import { TopicCacheService } from '../topic-cache.service';
 import { ArrayToDatePipe } from '../util/array-to-date.pipe';
-import { MatMenuModule } from '@angular/material/menu';
+import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { LessonComponent } from '../lesson/lesson.component';
 
 @Component({
