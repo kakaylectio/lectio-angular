@@ -1,14 +1,13 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Topic } from '../model/topic';
-import { Lesson } from '../model/lesson';
 import { LectioBackendService } from '../lectio-backend.service';
 import { TopicCacheService } from '../topic-cache.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {Location} from '@angular/common';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
+import { Topic, Lesson } from '../model/lectio-model.module';
 
 @Component({
   selector: 'app-topic-history',

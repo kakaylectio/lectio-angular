@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LectioBackendService } from '../lectio-backend.service';
-import { NotebookRep } from '../model/notebookrep';
-import { Notebook } from '../model/notebook';
-import { Topic } from '../model/topic';
 import { Router,ActivatedRoute  } from '@angular/router';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
+import { Topic, User, Notebook, NotebookRep } from '../model/lectio-model.module';
 
 @Component({
   selector: 'app-lesson',

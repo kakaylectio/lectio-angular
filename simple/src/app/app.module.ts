@@ -29,7 +29,7 @@ import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
     ArrayToDatePipe,
     HomeComponent,
     LessonEditorComponent,
-    TopicHistoryComponent,
+    TopicHistoryComponent
   ],
   imports: [
 	    BrowserModule,
@@ -42,9 +42,9 @@ import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
 	    ReactiveFormsModule,
 	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
 	    FlexLayoutModule,
-	    LectioNgMatModule
+	    LectioNgMatModule,
  ],
-  providers: [
+   providers: [
 	  LectioBackendService,
 	  LoginService,
 	  TopicCacheService
