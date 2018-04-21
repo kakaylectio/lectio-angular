@@ -1,13 +1,6 @@
 <mat-card class="lesson-editor" fxLayout="column">
-	<div class="card-header" fxLayout="row" fxFill>
+	<div class="card-header" >
 		<mat-card-title class="topicname" fxFlex>{{topic.name}}</mat-card-title>
-		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'" fxFlex="8" matToolTip="New Note" (click)="editButtonClicked();">
-			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
-		</button>
-		<button mat-icon-button fxFlex="8" (click)="historyButtonClicked();">
-			<mat-icon fontSet="fa" fontIcon="fa-history"></mat-icon>
-		</button>
-
 	</div>
 	
 	<mat-card-content>
@@ -47,4 +40,12 @@
 		</div>
 	</div> 
 	</mat-card-content>
+	<mat-card-footer fxLayout="row" fxLayoutAlign="end">
+		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'"  matToolTip="New Note" (click)="editButtonClicked();">
+			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
+		</button>
+		<button mat-icon-button (click)="historyButtonClicked();" mat-tool-tip="Show History">
+			<mat-icon fontSet="fa" fontIcon="fa-history"></mat-icon>
+		</button>
+	</mat-card-footer>
 </mat-card>
