@@ -1,5 +1,5 @@
 <div class="topic-history" fxLayout="column" fxLayoutAlign=" stretch">
-	<mat-toolbar color="primary">
+	<mat-toolbar color="primary" *ngIf="topic">
 		<mat-icon class="material-icons" (click)="clickBack();">arrow_back</mat-icon>
 		
 		<div class="topicname" fxFlex >{{topic.name}}</div>

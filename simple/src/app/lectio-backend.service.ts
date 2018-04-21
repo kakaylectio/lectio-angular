@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { NotebookRep } from './model/notebookrep';
 import { LoginService } from './login.service';
 import { Lesson } from './model/lesson';
+import { Topic } from './model/topic';
 
 @Injectable()
 export class LectioBackendService {
@@ -66,6 +67,12 @@ export class LectioBackendService {
 	  query = query.set('numitems', numLessons.toString());
 	  httpOptions['params'] = query;
 	  return this.httpClient.get<Lesson[]>(this.configUrl + path, httpOptions);
+  }
+  
+  findTopicById(topicId:number) : Observable<Topic> {
+	  let path = '/lectio/topic/' + topicId + "/findtopicbyid";
+	  let httpOptions = this.getHttpOptions();
+	  return this.httpClient.get<Topic>(this.configUrl + path, httpOptions);
   }
   
 }

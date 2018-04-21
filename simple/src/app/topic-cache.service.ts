@@ -5,6 +5,7 @@ import { Router, Resolve, RouterStateSnapshot,
     ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { LectioBackendService } from './lectio-backend.service';
 
 @Injectable()
 export class TopicCacheService implements Resolve<{topic:Topic, lastLesson:Lesson, secondLastLesson:Lesson}>{
@@ -12,7 +13,7 @@ export class TopicCacheService implements Resolve<{topic:Topic, lastLesson:Lesso
   private lastLesson : Lesson;
   private secondLastLesson : Lesson;
 	
-  constructor() { }
+  constructor(private lectioBackendService : LectioBackendService) { }
   
   setData ( theTopic : Topic, theLastLesson : Lesson, theSecondLastLesson : Lesson ) : void {
 	  this.topic = theTopic;
@@ -42,39 +43,12 @@ export class TopicCacheService implements Resolve<{topic:Topic, lastLesson:Lesso
   			  return of({topic:this.topic, lastLesson: this.lastLesson, secondLastLesson: this.secondLastLesson});
   		  }
   	  }
+  	  else {
+  	  	return of({topic:undefined, lastLesson: undefined, secondLastLesson: undefined});
+  	  }
   	  
-  	  // TODO:  Get the topic.
-	 let newTopic : Topic;
-  	  newTopic = new Topic();
-     newTopic.id = topicId;
-     newTopic.name = "Bogus Name";
-     return of({topic:newTopic, lastLesson: undefined, secondLastLesson: undefined});
   }
 
 }
 
-@Injectable()
-export class LastLessonResolver implements Resolve<Lesson>{
-	constructor(private topicCacheService : TopicCacheService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Lesson> {
-  	  let topicId = route.params.topicId;
-  	  if (this.topicCacheService.getTopic().id == topicId) {
-  	  		return of(this.topicCacheService.getLastLesson());
-	  }  	  
-		
-	}
-}
-
-@Injectable()
-export class SecondLastLessonResolver implements Resolve<Lesson>{
-	constructor(private topicCacheService : TopicCacheService) {}
-
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Lesson> {
-  	  let topicId = route.params.topicId;
-  	  if (this.topicCacheService.getTopic().id == topicId) {
-  	  		return of(this.topicCacheService.getSecondLastLesson());
-	  }  	  
-		
-	}
-}

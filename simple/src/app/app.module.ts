@@ -26,7 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
 import { TopicHistoryComponent } from './topic-history/topic-history.component';
-import { TopicCacheService, LastLessonResolver, SecondLastLessonResolver } from './topic-cache.service';
+import { TopicCacheService } from './topic-cache.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
@@ -61,8 +61,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   providers: [
 	  LectioBackendService,
 	  LoginService,
-	  TopicCacheService,
-	  LastLessonResolver, SecondLastLessonResolver
+	  TopicCacheService
   ],
   bootstrap: [AppComponent]
 })

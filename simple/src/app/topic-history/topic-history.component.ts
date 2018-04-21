@@ -39,19 +39,39 @@ export class TopicHistoryComponent implements OnInit {
 		  console.log("Data resolved." + JSON.stringify(data));
 		  let topicCache =  data['topicCache'];
 		  this.topic = topicCache['topic'];
-		  this.lastLesson = topicCache['lastLesson'];
-		  this.secondLastLesson = topicCache['secondLastLesson'];
-		  console.log("TopicHistoryComponent ngOnInit subscribed has this.topic = " + this.topic);
-		  console.log("TopicHistoryComponent ngOnInit subscribed has this.topic = " + this.topic);
-		  this.lessonList = [];
-		  this.nextLesson = undefined;
-		  if (this.lastLesson) {
-			  this.lessonList.push(this.lastLesson);
+		  if (!this.topic) {
+			  // Topic was not cached.  So retrieve the topic and 
+			  // fill out the list.
+			 let topicId = this.route.snapshot.params.topicId;
+			 this.lectioBackendService.findTopicById(topicId).subscribe(data =>{
+					 	this.topic = data;
+					 	if (this.topic) {
+  						  this.lessonList = [];
+  						  this.nextLesson = undefined;
+					 		this.fillList();
+					 	}
+			 		},
+					 error => {
+					 	console.log("Error finding topic by ID " + topicId);
+					 });
+
 		  }
-		  if (this.secondLastLesson) {
-			  this.lessonList.push(this.secondLastLesson);
-		  }
-		  this.fillList();
+		  else {
+			  // Topic was cached.  Retrieve last lesson and second last lesson in case
+			  // those were cached as well.  Topics are cached when they were already
+			  // retrieved from listing topics in notebook view.
+			  this.lastLesson = topicCache['lastLesson'];
+			  this.secondLastLesson = topicCache['secondLastLesson'];
+			  this.lessonList = [];
+			  this.nextLesson = undefined;
+			  if (this.lastLesson) {
+				  this.lessonList.push(this.lastLesson);
+			  }
+			  if (this.secondLastLesson) {
+				  this.lessonList.push(this.secondLastLesson);
+			  }
+			  this.fillList();
+	  	}
 	  });
 
 
@@ -59,7 +79,6 @@ export class TopicHistoryComponent implements OnInit {
   }
   
   fillList() {
-	 console.log("fillList() has " + this.lessonList.length + " items on the list.");
 	 if (this.nextLesson) {
 		 this.lessonList.push(this.nextLesson);
 		 this.nextLesson = undefined;
