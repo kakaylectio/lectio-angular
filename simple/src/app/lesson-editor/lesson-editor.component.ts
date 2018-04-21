@@ -4,6 +4,9 @@ import { Topic } from '../model/topic';
 import {LectioBackendService } from '../lectio-backend.service';
 import {MatButtonModule} from '@angular/material/button';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { Router } from '@angular/router';
+import { TopicCacheService } from '../topic-cache.service';
+import { ArrayToDatePipe } from '../util/array-to-date.pipe';
 
 @Component({
   selector: 'app-lesson-editor',
@@ -30,7 +33,9 @@ export class LessonEditorComponent implements OnInit {
   private isStaticLessonVisible : boolean;
   private editingContent : string;
   
-  constructor( private lectioBackendService : LectioBackendService , private froalaEditorModule : FroalaEditorModule) {
+  constructor( private lectioBackendService : LectioBackendService , private froalaEditorModule : FroalaEditorModule,
+		  private router : Router,
+		  private topicCacheService : TopicCacheService ) {
 	  
   }
 
@@ -51,6 +56,15 @@ export class LessonEditorComponent implements OnInit {
 	  		&& currentTime.getMonth()+1 == this.lastLesson.date[1]
 	  		&& currentTime.getDate() == this.lastLesson.date[2]) {
 		  console.log("Last lesson was today's lesson.  So keep it in editing mode.");
+		  console.log("currentTime.getFullYear() = " + currentTime.getFullYear());
+		  console.log("this.lastLesson.date[0] = " + this.lastLesson.date[0]);
+		  console.log("currentTime.getDate() " + currentTime.getDate());
+		  console.log("this.lastLesson.date[2] = " + this.lastLesson.date[2]);
+		  console.log("topic.name = " + this.topic.name);
+		  console.log(this.lastLesson.date);
+		  console.log(this.lastLesson.content);
+		  let pipe = new ArrayToDatePipe();
+		  console.log(pipe.transform(this.lastLesson.date));
 		  // Last lesson was edited today.  Don't create a new lesson and
 		  // keep editing today's lesson.
 		  this.editingLesson = this.lastLesson;
@@ -157,5 +171,19 @@ export class LessonEditorComponent implements OnInit {
 	  console.log("Expand");
 	  this.isStaticLessonVisible = true;
   }
+  
+  public historyButtonClicked() : void {
+	  console.log("History");
+	  if (this.editingLesson) {
+		  this.topicCacheService.setData(this.topic, this.editingLesson, this.lastLesson );
+	  }
+	  else {
+		  this.topicCacheService.setData(this.topic, this.lastLesson, undefined);
+	  }
+      this.router.navigate(['/topic-history', this.topic.id]);
+
+  }
+  
+  
 
 }

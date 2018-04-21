@@ -25,7 +25,9 @@ import {MatIconRegistry} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
-
+import { TopicHistoryComponent } from './topic-history/topic-history.component';
+import { TopicCacheService, LastLessonResolver, SecondLastLessonResolver } from './topic-cache.service';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
     HomeComponent,
     TrialComponent,
     LessonEditorComponent,
+    TopicHistoryComponent,
   ],
   imports: [
 	    BrowserModule,
@@ -52,11 +55,14 @@ import { LessonEditorComponent } from './lesson-editor/lesson-editor.component';
 	    HttpClientModule,
 	    ReactiveFormsModule,
 	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
-	    FlexLayoutModule
+	    FlexLayoutModule,
+	    MatToolbarModule
  ],
   providers: [
 	  LectioBackendService,
-	  LoginService
+	  LoginService,
+	  TopicCacheService,
+	  LastLessonResolver, SecondLastLessonResolver
   ],
   bootstrap: [AppComponent]
 })

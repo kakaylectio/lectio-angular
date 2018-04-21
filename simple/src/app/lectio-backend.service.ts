@@ -58,4 +58,14 @@ export class LectioBackendService {
 	  return this.httpClient.get<Lesson>(this.configUrl + path, httpOptions);
   }
   
+  // Get the whole history in pages.
+  findLessons(topicId: number, startIndex: number, numLessons: number) : Observable<Lesson[]> {
+	  let path = '/lectio/topic/' + topicId + "/findlessonnotes";
+	  let httpOptions = this.getHttpOptions();
+	  let query = new HttpParams().set('startindex', startIndex.toString());
+	  query = query.set('numitems', numLessons.toString());
+	  httpOptions['params'] = query;
+	  return this.httpClient.get<Lesson[]>(this.configUrl + path, httpOptions);
+  }
+  
 }

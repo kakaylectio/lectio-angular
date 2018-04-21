@@ -10,14 +10,14 @@ export class ArrayToDatePipe implements PipeTransform {
  	  var theDate: Date;
   	 theDate = new Date();
 	  if (jacksonDate.length >= 3) {
-		  theDate.setUTCFullYear(jacksonDate[0]);
-		  theDate.setUTCMonth(jacksonDate[1]-1);
-		  theDate.setUTCDate(jacksonDate[2]);
+		  theDate.setFullYear(jacksonDate[0]);
+		  theDate.setMonth(jacksonDate[1]-1);
+		  theDate.setDate(jacksonDate[2]);
 	  }
 	  if (jacksonDate.length >= 6) {
-		  theDate.setUTCHours (jacksonDate[3]);
-		  theDate.setUTCMinutes(jacksonDate[4]);
-		  theDate.setUTCSeconds(jacksonDate[5]);
+		  theDate.setHours (jacksonDate[3]);
+		  theDate.setMinutes(jacksonDate[4]);
+		  theDate.setSeconds(jacksonDate[5]);
 	  }
 	  return theDate;
   }

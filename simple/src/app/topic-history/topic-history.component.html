@@ -1,0 +1,21 @@
+<div class="topic-history" fxLayout="column" fxLayoutAlign=" stretch">
+	<mat-toolbar color="primary">
+		<mat-icon class="material-icons" (click)="clickBack();">arrow_back</mat-icon>
+		
+		<div class="topicname" fxFlex >{{topic.name}}</div>
+	</mat-toolbar>
+	<div class="lessonlist" fxLayout="column" fxLayoutAlign=" stretch">
+		<div class="lessonbox" *ngFor="let lesson of lessonList; let i = index" fxLayout="column">
+			<div  class="lessondate" *ngIf="lesson.date" fxFlex>
+				<span>{{lesson.date | arrayToDate | date}} </span>
+			</div>
+			<div class="lessoncontent"
+				[innerHTML]="lesson.content" fxFlexAlign="baseline">
+			</div>
+		<mat-divider *ngIf="i < lessonList.length-1"></mat-divider>
+		</div>
+	</div>
+	<div class="loadButtonContainer" *ngIf="nextLesson" fxLayoutAlign=" center">
+		<button mat-button (click)="fillList();">Load more lessons...</button>
+	</div>
+</div>

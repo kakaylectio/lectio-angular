@@ -4,6 +4,10 @@
 		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'" fxFlex="8" matToolTip="New Note" (click)="editButtonClicked();">
 			<mat-icon fontSet="fa" fontIcon="fa-edit"></mat-icon>
 		</button>
+		<button mat-icon-button fxFlex="8" (click)="historyButtonClicked();">
+			<mat-icon fontSet="fa" fontIcon="fa-history"></mat-icon>
+		</button>
+
 	</div>
 	
 	<div class="editsection" *ngIf="editingLesson">

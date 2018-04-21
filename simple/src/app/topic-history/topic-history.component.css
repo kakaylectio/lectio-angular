@@ -1,0 +1,45 @@
+.topicname {
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+	position: sticky;
+	top: 0px;
+	z-index: 50;
+}
+
+
+
+div.lessonlist {
+	margin-left: 0;
+	padding-left: 20px;
+	max-width: 400px;
+	z-index:40;
+	
+}
+
+div.lessonbox {
+	margin-bottom: 10px;
+}
+
+div.lessondate {
+	color: gray;
+	font-size: small;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+div.lessoncontent {
+	margin-top: 0px;
+	padding-top: 0px;
+	font-size: large;
+	line-height: 1.5;
+}
+
+mat-divider {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+mat-toolbar {
+	color: accent;
+}
