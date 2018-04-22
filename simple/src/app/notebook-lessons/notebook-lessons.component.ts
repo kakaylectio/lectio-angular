@@ -7,15 +7,15 @@ import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { Topic, User, Notebook, NotebookRep } from '../model/lectio-model.module';
 
 @Component({
-  selector: 'app-lesson',
-  templateUrl: './lesson.component.html',
-  styleUrls: ['./lesson.component.css']
+  selector: 'app-notebook-lessons',
+  templateUrl: './notebook-lessons.component.html',
+  styleUrls: ['./notebook-lessons.component.css']
 })
 
 
-// LessonComponent contains the listing of all active topics
+// NotebookLessonsComponent contains the listing of all active topics
 // and their last lesson in a notebook.  This is where lessons can be added to a topic.
-export class LessonComponent implements OnInit {
+export class NotebookLessonsComponent implements OnInit {
   private notebookData : string;
   private notebook : Notebook;
   private notebookId : number;

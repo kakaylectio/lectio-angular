@@ -81,4 +81,10 @@ export class LectioBackendService {
 	  return this.httpClient.post<Topic>(this.configUrl + path, {}, httpOptions);
   }
   
+  createTopic(notebookId:number, topicName:string) : Observable<Topic> {
+	  let path = '/lectio/notebook/' + notebookId + '/createtopic';
+	  let httpOptions = this.getHttpOptions();
+	  return this.httpClient.post<Topic>(this.configUrl+path, topicName, httpOptions);
+  }
+  
 }

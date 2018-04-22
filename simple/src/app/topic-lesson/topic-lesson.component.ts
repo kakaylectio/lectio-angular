@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { TopicCacheService } from '../topic-cache.service';
 import { ArrayToDatePipe } from '../util/array-to-date.pipe';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
-import { LessonComponent } from '../lesson/lesson.component';
+import { NotebookLessonsComponent } from '../notebook-lessons/notebook-lessons.component';
 import { Topic, Lesson } from '../model/lectio-model.module';
 
 @Component({
-  selector: 'app-lesson-editor',
-  templateUrl: './lesson-editor.component.html',
-  styleUrls: ['./lesson-editor.component.css']
+  selector: 'app-topic-lesson',
+  templateUrl: './topic-lesson.component.html',
+  styleUrls: ['./topic-lesson.component.css']
 })
 
 // This is the component that encompasses both the 
@@ -24,9 +24,9 @@ import { Topic, Lesson } from '../model/lectio-model.module';
 // clicking on the edit icon.
 // Two lessons cannot be created on the same date.  If the last lesson was created
 // only today, then the last lesson is the editingLesson.
-export class LessonEditorComponent implements OnInit {
+export class TopicLessonComponent implements OnInit {
 
-  @Input() parentView: LessonComponent;
+  @Input() parentView: NotebookLessonsComponent;
   @Input() topic : Topic;
   @Input() role : string;
   private editingLesson : Lesson;

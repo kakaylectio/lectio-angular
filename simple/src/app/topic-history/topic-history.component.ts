@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { LectioBackendService } from '../lectio-backend.service';
 import { TopicCacheService } from '../topic-cache.service';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import {Location} from '@angular/common';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { Topic, Lesson } from '../model/lectio-model.module';
@@ -33,7 +33,6 @@ export class TopicHistoryComponent implements OnInit {
   ngOnInit() {
 	  
 	  this.route.data.subscribe((data: {topic:Topic, lastLesson:Lesson, secondLastLesson:Lesson}) => {
-		  console.log("Data resolved." + JSON.stringify(data));
 		  let topicCache =  data['topicCache'];
 		  this.topic = topicCache['topic'];
 		  if (!this.topic) {

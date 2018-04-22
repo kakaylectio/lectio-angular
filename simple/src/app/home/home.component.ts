@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 					 let notebookRep : NotebookRep;
 				 	 notebookRep = data[0];
 				 	 console.log("The notebook id is " + notebookRep.notebook.id);
-				 	 this.router.navigate(['/lessons', notebookRep.notebook.id]);
+				 	 this.router.navigate(['/notebookview', notebookRep.notebook.id]);
 				 } 
 			  },
 			  error => {
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 	  );
 	  
 	  console.log("About to navigate to lessons");
-	  this.router.navigate(['lessons']);
+	  this.router.navigate(['/notebookview']);
 	  
   }
 
