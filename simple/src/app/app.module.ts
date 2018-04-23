@@ -20,6 +20,7 @@ import { TopicLessonComponent } from './topic-lesson/topic-lesson.component';
 import { TopicHistoryComponent } from './topic-history/topic-history.component';
 import { TopicCacheService } from './topic-cache.service';
 import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
+import { NewTopicDialogComponent } from './new-topic-dialog/new-topic-dialog.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
     ArrayToDatePipe,
     HomeComponent,
     TopicLessonComponent,
-    TopicHistoryComponent
+    TopicHistoryComponent,
+    NewTopicDialogComponent
   ],
   imports: [
 	    BrowserModule,
@@ -49,6 +51,7 @@ import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
 	  LoginService,
 	  TopicCacheService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NewTopicDialogComponent]
 })
 export class AppModule { }

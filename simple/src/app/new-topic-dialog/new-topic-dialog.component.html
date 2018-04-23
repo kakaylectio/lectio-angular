@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>New Topic</h2>
+<label *ngIf="data.preError">{{data.preError}}</label>
+<mat-dialog-content [formGroup]="form">
+	<mat-form-field>
+		<input matInput placeholder="New Topic Name"
+			formControlName="topicName" />
+	</mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button class="mat-button" (click)="close()">Cancel</button>
+	<button class="mat-button" (click)="createTopic()">Create Topic</button>
+</mat-dialog-actions>

@@ -5,6 +5,8 @@ import { Router,ActivatedRoute  } from '@angular/router';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { Topic, User, Notebook, NotebookRep } from '../model/lectio-model.module';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { NewTopicDialogComponent } from '../new-topic-dialog/new-topic-dialog.component';
 
 @Component({
   selector: 'app-notebook-lessons',
@@ -26,7 +28,7 @@ export class NotebookLessonsComponent implements OnInit {
   
   constructor(private lectioBackendService: LectioBackendService, 
 		  private route:  ActivatedRoute, 
-		  ) {
+		  private dialog: MatDialog) {
 
   }
 
@@ -34,9 +36,8 @@ export class NotebookLessonsComponent implements OnInit {
   ngOnInit() {
       this.route.params.subscribe(params => {
 
-          let notebookId = params['notebookId'];
-		  console.log("lesson.component got notebookId = " + notebookId);
-		  this.showTopicsWithLesson(notebookId);
+          this.notebookId = params['notebookId'];
+		  this.showTopicsWithLesson(this.notebookId);
 
       });
   }
@@ -62,5 +63,41 @@ export class NotebookLessonsComponent implements OnInit {
   rescanTopicList() {
 	  this.showTopicsWithLesson(this.notebookId);
   }
+  
+  newTopicClicked(preError: string) {
+	  console.log("newTopicClicked preError = " + preError);
+	  const dialogConfig = new MatDialogConfig();
+	  dialogConfig.autoFocus = true;
+	  dialogConfig.data = {preError: preError };
+	  console.log(JSON.stringify(dialogConfig));
+	  const dialogRef = this.dialog.open(NewTopicDialogComponent, dialogConfig);
+	  
+	  dialogRef.afterClosed().subscribe(
+			  data => {
+				  if (data) {
+					  if (data.topicName) {
+						  this.lectioBackendService.createTopic(this.notebookId, data.topicName).subscribe(
+						     createTopicData => {
+						    	 this.topicList.splice(0, 0, createTopicData);
+						     },
+						     createTopicError => {
+						    	 if (createTopicError.status) {
+						    		 if (createTopicError.status == 409) {
+						    			 if (createTopicError.error) {
+						    				 this.newTopicClicked(createTopicError.error);
+						    			 }
+						    		 }
+						    	 }
+						    	 console.log("Create topic had an error. ", JSON.stringify(createTopicError));
+						     }
+						  );
+					  }
+			  	  }
+			  }
+	  );
+  }
+  
+  
+  
 
 }

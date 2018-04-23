@@ -6,9 +6,10 @@ div.prodname {
 
 
 
-h1 {
+.notebook-title {
 	font-family: 'Satisfy';
 	margin-top: 2%;
+	font-size: xx-large;
 }
 
 mat-icon {

@@ -1,5 +1,11 @@
 <div class="prodname">Lectio</div>
-<h1 class="notebook-title" *ngIf="notebook">{{notebook.name}}</h1>
+<div class="notebook-header" fxLayout="row">
+	<div class="notebook-title" *ngIf="notebook" fxFlex>{{notebook.name}}</div>
+	<button mat-icon-button *ngIf="role == 'teacher'" fxFlex="8" matToolTip="New Topic" (click)="newTopicClicked(undefined)">
+		<mat-icon class="material-icons" >add_box</mat-icon>
+	</button>
+
+</div>
 
 <div class="topic-card" *ngFor="let topic of topicList"> 
 		<app-topic-lesson [topic]="topic" [role]="role" [parentView]="this"></app-topic-lesson>
