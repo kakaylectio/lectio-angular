@@ -71,7 +71,6 @@ export class NotebookLessonsComponent implements OnInit {
 	  dialogConfig.data = {preError: preError };
 	  console.log(JSON.stringify(dialogConfig));
 	  const dialogRef = this.dialog.open(NewTopicDialogComponent, dialogConfig);
-	  
 	  dialogRef.afterClosed().subscribe(
 			  data => {
 				  if (data) {

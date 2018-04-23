@@ -30,5 +30,10 @@ export class NewTopicDialogComponent implements OnInit {
 	  this.dialogRef.close(this.form.value);
   }
   
+  onEnter(newTopicName:string) {
+	  console.log('onEnter with ' + newTopicName);
+	  this.dialogRef.close({topicName: newTopicName});
+	  
+  }
 
 }

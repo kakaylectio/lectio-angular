@@ -2,8 +2,8 @@
 <label *ngIf="data.preError">{{data.preError}}</label>
 <mat-dialog-content [formGroup]="form">
 	<mat-form-field>
-		<input matInput placeholder="New Topic Name"
-			formControlName="topicName" />
+		<input matInput #newTopicNameInput placeholder="New Topic Name"
+			formControlName="topicName" (keyup.enter)="onEnter(newTopicNameInput.value)"/>
 	</mat-form-field>
 </mat-dialog-content>
 
