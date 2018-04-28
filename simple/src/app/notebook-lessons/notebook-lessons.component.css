@@ -1,41 +1,27 @@
-div.prodname {
-#	font-family: 'Arial';
-	font-size: small;
-	color: grey;
+.notebook-topbar {
+	background-color:  var(--notebook-bg-color);
+	position: sticky;
+	top: 1.5rem;
+	z-index: 2;
 }
 
-
+.notebook-header {
+	max-width: 800px;
+	
+}
 
 .notebook-title {
 	font-family: 'Satisfy';
 	margin-top: 2%;
+	margin-left: 1rem;
 	font-size: xx-large;
+	color: var(--notebook-contrast-color);
 }
+
+
 
 mat-icon {
 	font-size: medium;
 	style: regular;
 }
-mat-card {
-	margin-left: 1rem;
-	margin-bottom: 0.5rem;
-	max-width: 800px;
-	background-color: #ffffffaa; 
-}
-
-
-
-mat-card-title {
-	#font-weight: bold;
-}
-
-mat-card-subtitle {
-	font-size: smaller;
-}
-
-mat-card-content {
-	line-height: 1.5;
-	font-size: medium;
-}
-
 

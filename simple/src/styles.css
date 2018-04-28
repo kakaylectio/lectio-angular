@@ -8,8 +8,9 @@
 @import  "../node_modules/froala-editor/css/froala_style.min.css";
 @import  "../node_modules/font-awesome/css/font-awesome.css";
 
-@import "./lectioeditor-theme.css";
+@import "./app/styles/lectio-theme.css";
+@import "./app/styles/lectioeditor-theme.css";
 
 body {
-	background: white;
+	margin: 0px;
 }

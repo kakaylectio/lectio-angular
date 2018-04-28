@@ -6,6 +6,27 @@ mat-icon.lesson-action{
 	font-size: xx-large;
 	color: gray;
 }
+mat-card {
+	margin-left: 1rem;
+	margin-bottom: 0.5rem;
+	max-width: 800px;
+	background-color: #ffffffee; 
+}
+
+
+mat-card-title {
+	#font-weight: bold;
+}
+
+mat-card-subtitle {
+	font-size: smaller;
+}
+
+mat-card-content {
+	line-height: 1.5;
+	font-size: medium;
+}
+
 
 
 

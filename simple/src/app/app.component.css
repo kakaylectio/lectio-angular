@@ -1,0 +1,17 @@
+div.prodname {
+	font-size: small;
+	color: var(--lectio-light-text);
+	margin-left: 1rem;
+	padding-top: 0.5rem;
+	
+}
+
+div.app {
+#	background-image: url('/assets/backgrounds/flowers-3352371_1920.jpg');
+	background-color: DarkSlateGray;
+	background-size:  cover;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}

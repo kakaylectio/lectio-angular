@@ -1,0 +1,10 @@
+.notebook-theme {
+	--notebook-bg-color:  DarkSlateGray;
+	--notebook-contrast-color: NavajoWhite;
+	--notebook-secondary-color: Tomato;
+}
+
+.lectio-theme {
+	--lectio-dark-text: black;
+	--lectio-light-text: lightskyblue;
+}
