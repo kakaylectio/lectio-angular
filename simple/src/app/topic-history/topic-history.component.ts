@@ -19,8 +19,8 @@ export class TopicHistoryComponent implements OnInit {
   @Input() topic : Topic;
   @Input() lastLesson : Lesson;
   @Input() secondLastLesson : Lesson;
-  private nextLesson : Lesson;
-  private lessonList : Lesson[];
+  nextLesson : Lesson;
+  lessonList : Lesson[];
 
   constructor(  private route: ActivatedRoute,
 		  private router: Router,

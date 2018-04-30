@@ -15,8 +15,10 @@ export class HomeComponent implements OnInit {
 		  private backendService: LectioBackendService, private router:  Router) { }
 
   ngOnInit() {
+	  console.log("Logging in");
 	  this.loginService.login('aral@vorkosigan.com', 'cordelia', this.onUserLoggedIn);
 //	  this.loginService.login('miles@dendarii.com', 'naismith', this.onUserLoggedIn);
+
   }
   
   onUserLoggedIn = (user:User) => 
@@ -29,7 +31,8 @@ export class HomeComponent implements OnInit {
 					 let notebookRep : NotebookRep;
 				 	 notebookRep = data[0];
 				 	 console.log("The notebook id is " + notebookRep.notebook.id);
-				 	 this.router.navigate(['/notebookview', notebookRep.notebook.id]);
+				 	 this.router.navigate(['/notebook', notebookRep.notebook.id]);
+				 	 console.log("navigated");
 				 } 
 			  },
 			  error => {
@@ -37,8 +40,6 @@ export class HomeComponent implements OnInit {
 			  }
 	  );
 	  
-	  console.log("About to navigate to lessons");
-	  this.router.navigate(['/notebookview']);
 	  
   }
 

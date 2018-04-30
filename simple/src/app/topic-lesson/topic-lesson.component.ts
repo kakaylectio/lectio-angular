@@ -7,7 +7,7 @@ import { ArrayToDatePipe } from '../util/array-to-date.pipe';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { NotebookLessonsComponent } from '../notebook-lessons/notebook-lessons.component';
 import { Topic, Lesson } from '../model/lectio-model.module';
-
+import { NotebookService } from '../notebook/notebook.service';
 @Component({
   selector: 'app-topic-lesson',
   templateUrl: './topic-lesson.component.html',
@@ -29,14 +29,15 @@ export class TopicLessonComponent implements OnInit {
   @Input() parentView: NotebookLessonsComponent;
   @Input() topic : Topic;
   @Input() role : string;
-  private editingLesson : Lesson;
-  private lastLesson : Lesson;
-  private isStaticLessonVisible : boolean;
-  private editingContent : string;
+  editingLesson : Lesson;
+  lastLesson : Lesson;
+  isStaticLessonVisible : boolean;
+  editingContent : string;
   
   constructor( private lectioBackendService : LectioBackendService , private froalaEditorModule : FroalaEditorModule,
 		  private router : Router,
-		  private topicCacheService : TopicCacheService ) {
+		  private topicCacheService : TopicCacheService,
+		  private notebookService:  NotebookService) {
 	  
   }
 
@@ -173,13 +174,9 @@ export class TopicLessonComponent implements OnInit {
   
   public archiveButtonClicked() : void {
 	  // TODO:  Add an Are You Sure? modal dialog.
-	  this.lectioBackendService.archiveTopic(this.topic.id).subscribe(data=>{
-	  	this.parentView.rescanTopicList();
-	  },
-	  error=> {
-		  console.log("Error archiving topic.");
 	  
-	  });
+	  this.notebookService.archiveTopic(this.topic.id);
+	  	
   }
   
   

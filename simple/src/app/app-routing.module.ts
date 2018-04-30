@@ -5,7 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { TopicHistoryComponent } from './topic-history/topic-history.component';
 import { TopicCacheService } from './topic-cache.service';
 const routes: Routes = [
-	{ path: 'notebookview/:notebookId', component: NotebookLessonsComponent },
+	{ path: '', component: HomeComponent },
+//	{ path: 'notebookview/:notebookId', component: NotebookLessonsComponent },
+	{
+		path: 'notebook/:notebookId', 
+		loadChildren: 'app/notebook/notebook.module#NotebookModule'
+	},
+	
 	{ 
 		path: 'topic-history/:topicId', 
 		component: TopicHistoryComponent,
@@ -13,7 +19,6 @@ const routes: Routes = [
 			topicCache : TopicCacheService,
 		}
 	},
-	{ path: '', component: HomeComponent },
 	{ path: '**', redirectTo: '' },
 ];
 

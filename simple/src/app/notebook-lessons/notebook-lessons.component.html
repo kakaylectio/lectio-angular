@@ -1,15 +1,7 @@
-<div class="notebook-topbar notebook-theme lectio-theme">
-	<div class="notebook-header notebook-theme lectio-theme" fxLayout="row">
-		<div class="notebook-title notebook-theme" *ngIf="notebook" fxFlex>{{notebook.name}}</div>
-		<button mat-icon-button *ngIf="role == 'teacher'" fxFlex="8" matToolTip="New Topic" (click)="newTopicClicked(undefined)">
-			<mat-icon class="material-icons" >add_box</mat-icon>
-		</button>
-	
-	</div>
-</div>
-
+<div *ngIf="notebook">
 <div class="topic-card" *ngFor="let topic of topicList"> 
 		<app-topic-lesson [topic]="topic" [role]="role" [parentView]="this"></app-topic-lesson>
+</div>
 </div>
 
 
