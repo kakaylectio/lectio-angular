@@ -5,48 +5,103 @@ import { Router, Resolve, RouterStateSnapshot,
     ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { LectioBackendService } from './lectio-backend.service';
 
+// When information about a notebook is retrieved, the last lesson on each topic is also retrieved.
+// Sometimes, when the last lesson is at today's date, the second last lesson is already retrieved.
+// For efficiency, when user requests all lesson notes to be retrieved for a topic, it is inefficient
+// to retrieve the last two lessons again.  This service is to cache the last two lessons to save
+// the lessons from retrieval again.
+
+// The Notebook with Active Topics view calls setData to set what it knows about the lessons.
+// This service is a Resolve object that is used in the app routing.    
+// The Topic History component subscribes to the route data to retrieve this object.
+
+// I don't like this implementation.  I want to change this to use Subject Observables instead.
 @Injectable()
-export class TopicCacheService implements Resolve<{topic:Topic, lastLesson:Lesson, secondLastLesson:Lesson}>{
+export class TopicCacheService {
   private topic : Topic;
+  private lessonList : Lesson[] = [];
   private lastLesson : Lesson;
   private secondLastLesson : Lesson;
+  
+  // nextLesson is retrieved but not pushed as part of the observable because
+  // it is used to test whether or not there are more Lessons after the last lesson.
+  // If nextLesson is null, that means there are no more lessons.
+  private nextLesson : Lesson;  
+  
+  private topicObservable : BehaviorSubject <{topic : Topic, lessonList: Lesson[], hasMoreLessons : boolean}> 
+	  = new BehaviorSubject(
+		  {topic: undefined, 
+		  lessonList: [],
+		  hasMoreLessons: false}
+	  );
 	
   constructor(private lectioBackendService : LectioBackendService) { }
   
+  // Checks that this service is set to the right topic.  If not, then change topic.
+  checkTopicId(topicId : number) {
+  	if (this.topic) {
+  		if (this.topic.id == topicId) {
+  			// This service is already set to the correct ID.  So return.
+  			return;
+  		}
+  	}
+  	
+  	// This service is not set to the right topic.  So find the topic and set up the service.
+	this.lectioBackendService.findTopicById(topicId).subscribe(data =>{
+			 	this.setData(data, null, null);
+	 		},
+			 error => {
+			 	console.log("Error finding topic by ID " + topicId);
+			 });
+  	
+  }
+  
   setData ( theTopic : Topic, theLastLesson : Lesson, theSecondLastLesson : Lesson ) : void {
 	  this.topic = theTopic;
+	  this.lessonList = []; 
+	  if (theLastLesson) {
+	     this.lessonList.push(theLastLesson);
+	  }
+	  if (theSecondLastLesson) {
+	  	  this.lessonList.push(theSecondLastLesson);
+	  }
+	  this.topicObservable.next({topic: this.topic, lessonList: this.lessonList, hasMoreLessons: true});
+	  this.loadMoreLessons();
+	  
 	  this.lastLesson = theLastLesson;
 	  this.secondLastLesson = theSecondLastLesson;
+	 
   }
   
-  getTopic () : Topic {
-	  return this.topic;
-  }
+  getTopicLessonObservable() {
+  	return this.topicObservable;
+  } 
   
-  getLastLesson() : Lesson {
-	  return this.lastLesson;
-  }
-  
-  getSecondLastLesson() : Lesson {
-	  return this.secondLastLesson;
-  }
-  
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{topic:Topic, lastLesson:Lesson, secondLastLesson:Lesson}> {
-	  let retrievingTopic : Topic;
-  	  let topicId = route.params.topicId;
-  	  if (this.topic) {
-  		  if (this.topic.id == topicId) {
-  		  		console.log("topic-cache-service this.topic.id = " + this.topic.id);
-  		  		console.log("last lesson = " + this.lastLesson);
-  			  return of({topic:this.topic, lastLesson: this.lastLesson, secondLastLesson: this.secondLastLesson});
-  		  }
-  	  }
-  	  else {
-  	  	return of({topic:undefined, lastLesson: undefined, secondLastLesson: undefined});
-  	  }
-  	  
+  loadMoreLessons() :void {
+  	  this.nextLesson = undefined;
+	  this.lectioBackendService.findLessons(this.topic.id, this.lessonList.length, 6).subscribe(
+		 data => {
+			 data.forEach((lesson, index) => {
+				 if (index < 6-1) {
+					 this.lessonList.push(lesson);
+				 }
+				 else {
+					 this.nextLesson = lesson;
+				 }
+			 });// End of forEach
+			 console.log("Has more lessons is " + this.nextLesson == null);
+			 this.topicObservable.next({
+			 	topic: this.topic, 
+			 	lessonList : this.lessonList, 
+			 	hasMoreLessons: !(this.nextLesson == null)});
+		 },  // end of data=>
+		 error => {
+			 console.log("Error retrieving more lessons.");
+		 }
+	  );// end of subscribe
   }
 
 }

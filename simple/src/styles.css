@@ -11,6 +11,10 @@
 @import "./app/styles/lectio-theme.css";
 @import "./app/styles/lectioeditor-theme.css";
 
+html {
+	min-height: 100%;
+}
 body {
 	margin: 0px;
+	height: 100%;
 }

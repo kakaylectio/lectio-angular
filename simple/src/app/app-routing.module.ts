@@ -12,13 +12,6 @@ const routes: Routes = [
 		loadChildren: 'app/notebook/notebook.module#NotebookModule'
 	},
 	
-	{ 
-		path: 'topic-history/:topicId', 
-		component: TopicHistoryComponent,
-		resolve : {
-			topicCache : TopicCacheService,
-		}
-	},
 	{ path: '**', redirectTo: '' },
 ];
 

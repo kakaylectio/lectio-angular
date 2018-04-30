@@ -14,7 +14,7 @@ import { TokenInterceptor } from './token.interceptor';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
 import { NewTopicDialogComponent } from './new-topic-dialog/new-topic-dialog.component';
 import { NotebookModule } from './notebook/notebook.module';

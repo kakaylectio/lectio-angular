@@ -1,23 +1,22 @@
 <div class="topic-history" fxLayout="column" fxLayoutAlign=" stretch">
-	<mat-toolbar class="mat-elevation-z1" color="primary" *ngIf="topic">
-		<button mat-icon-button (click)="clickBack();">
-			<mat-icon class="material-icons" >arrow_back</mat-icon>
+	<div class="topic-history-header lectio-theme notebook-theme" *ngIf="topic" fxLayout="row" fxLayoutAlign=" center">
+		<button mat-icon-button class="lectio-theme notebook-theme" (click)="clickBack();">
+			<mat-icon class="material-icons lectio-theme notebook-theme" >arrow_back</mat-icon>
 		</button>
 		
 		<div class="topicname" fxFlex >{{topic.name}}</div>
-	</mat-toolbar>
+	</div>
 	<div class="lessonlist" fxLayout="column" fxLayoutAlign=" stretch">
-		<div class="lessonbox" *ngFor="let lesson of lessonList; let i = index" fxLayout="column">
-			<div  class="lessondate" *ngIf="lesson.date" fxFlex>
+		<mat-card class="lessonbox" *ngFor="let lesson of lessonList" fxLayout="column">
+			<div  class="lessondate lectio-theme notebook-theme" *ngIf="lesson.date" fxFlex>
 				<span>{{lesson.date | arrayToDate | date}} </span>
 			</div>
-			<div class="lessoncontent"
+			<div class="lessoncontent lectio-theme notebook-theme"
 				[innerHTML]="lesson.content" fxFlexAlign="baseline">
 			</div>
-		<mat-divider *ngIf="i < lessonList.length-1"></mat-divider>
-		</div>
+		</mat-card>
 	</div>
-	<div class="loadButtonContainer" *ngIf="nextLesson" fxLayoutAlign=" center">
-		<button mat-button (click)="fillList();">Load more lessons...</button>
+	<div class="loadButtonContainer lectio-theme notebook-theme" *ngIf="hasMoreLessons" fxLayout="column" fxLayoutAlign=" center">
+		<button mat-button class="lectio-theme notebook-theme" (click)="loadMoreLessons();">Load more lessons...</button>
 	</div>
 </div>

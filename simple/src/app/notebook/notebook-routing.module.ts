@@ -8,17 +8,15 @@ import { NotebookHomeComponent } from './notebook-home/notebook-home.component';
 
 const notebookRoutes: Routes = [
 	{ 
+		
 		path: 'notebook/:notebookId',
 		component: NotebookComponent,
 		children: [
-	//		{ path:  '', component: NotebookHomeComponent},
 			{ path: '', component: NotebookLessonsComponent },
 			{ 
 				path: 'topic-history/:topicId', 
 				component: TopicHistoryComponent,
-				resolve : {
-					topicCache : TopicCacheService,
-				}
+				
 			}			
 		]
 	}

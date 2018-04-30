@@ -168,7 +168,7 @@ export class TopicLessonComponent implements OnInit {
 	  else {
 		  this.topicCacheService.setData(this.topic, this.lastLesson, undefined);
 	  }
-      this.router.navigate(['/topic-history', this.topic.id]);
+      this.router.navigate(['notebook', this.parentView.notebook.id, 'topic-history', this.topic.id]);
 
   }
   

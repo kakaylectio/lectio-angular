@@ -10,7 +10,7 @@ div.prodname {
 	background-color:  var(--notebook-bg-color);
 	position: sticky;
 	top: 0px;
-	z-index: 2;
+	z-index: 6;
 }
 
 .notebook-header {

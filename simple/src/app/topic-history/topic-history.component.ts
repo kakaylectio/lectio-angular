@@ -8,6 +8,7 @@ import { TopicCacheService } from '../topic-cache.service';
 import {Location} from '@angular/common';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { Topic, Lesson } from '../model/lectio-model.module';
+import { NotebookService } from '../notebook/notebook.service';
 
 @Component({
   selector: 'app-topic-history',
@@ -17,84 +18,49 @@ import { Topic, Lesson } from '../model/lectio-model.module';
 export class TopicHistoryComponent implements OnInit {
 
   @Input() topic : Topic;
-  @Input() lastLesson : Lesson;
-  @Input() secondLastLesson : Lesson;
-  nextLesson : Lesson;
+  hasMoreLessons : boolean;
   lessonList : Lesson[];
 
   constructor(  private route: ActivatedRoute,
 		  private router: Router,
 		  private lectioBackendService : LectioBackendService,
 		  private topicCacheService : TopicCacheService ,
+		  private notebookService: NotebookService,
 		  private _location: Location) { 
 	  
   }
 
   ngOnInit() {
+	  if (this.topic) {
+		  console.log("TopicHistoryComponent ngOnInit has topic.");
+		  this.fillList(this.topic.id);
+	  }
+	  else {
+		  this.route.params.subscribe(params => {
+			  console.log('TopicHistoryComponent route params');
+	    	  let topicId : number;
+	    	  topicId = params['topicId'];
+	    	  this.fillList(topicId);
+	      });
+	  }
 	  
-	  this.route.data.subscribe((data: {topic:Topic, lastLesson:Lesson, secondLastLesson:Lesson}) => {
-		  let topicCache =  data['topicCache'];
-		  this.topic = topicCache['topic'];
-		  if (!this.topic) {
-			  // Topic was not cached.  So retrieve the topic and 
-			  // fill out the list.
-			 let topicId = this.route.snapshot.params.topicId;
-			 this.lectioBackendService.findTopicById(topicId).subscribe(data =>{
-					 	this.topic = data;
-					 	if (this.topic) {
-  						  this.lessonList = [];
-  						  this.nextLesson = undefined;
-					 		this.fillList();
-					 	}
-			 		},
-					 error => {
-					 	console.log("Error finding topic by ID " + topicId);
-					 });
-
-		  }
-		  else {
-			  // Topic was cached.  Retrieve last lesson and second last lesson in case
-			  // those were cached as well.  Topics are cached when they were already
-			  // retrieved from listing topics in notebook view.
-			  this.lastLesson = topicCache['lastLesson'];
-			  this.secondLastLesson = topicCache['secondLastLesson'];
-			  this.lessonList = [];
-			  this.nextLesson = undefined;
-			  if (this.lastLesson) {
-				  this.lessonList.push(this.lastLesson);
-			  }
-			  if (this.secondLastLesson) {
-				  this.lessonList.push(this.secondLastLesson);
-			  }
-			  this.fillList();
-	  	}
-	  });
-
-
-
   }
   
-  fillList() {
-	 if (this.nextLesson) {
-		 this.lessonList.push(this.nextLesson);
-		 this.nextLesson = undefined;
-	 }
-	  this.lectioBackendService.findLessons(this.topic.id, this.lessonList.length, 6).subscribe(
-		 data => {
-			 data.forEach((lesson, index) => {
-				 if (index < 6-1) {
-					 this.lessonList.push(lesson);
-				 }
-				 else {
-					 this.nextLesson = lesson;
-				 }
-			 });
-		 },
-		 error => {
-			 console.log("Error retrieving more lessons.");
-		 }
+  loadMoreLessons() : void {
+	  this.topicCacheService.loadMoreLessons();
+  }
+  
+  fillList(topicId : number) : void{
+	  this.topicCacheService.checkTopicId(topicId);
+	  this.topicCacheService.getTopicLessonObservable().subscribe(
+			  data => {
+				  this.topic = data['topic'];
+				  this.lessonList = data['lessonList'];
+				  this.hasMoreLessons = data['hasMoreLessons'];
+			  }
 	  );
   }
+  
   
   clickBack():void {
 	  this._location.back();

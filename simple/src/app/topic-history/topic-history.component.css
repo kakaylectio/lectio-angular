@@ -1,14 +1,25 @@
+.topic-history-header {
+	color: var(--notebook-contrast-color);
+	position: sticky;
+	top: 5rem;
+	z-index: 5;
+	background-color:  var(--notebook-bg-color);
+}
+
+.topic-history {
+	height: 100%;
+	padding-bottom: 1rem;
+}
+
 .topicname {
 	text-align: center;
 	font-size: large;
 	font-weight: bold;
-	position: sticky;
 	top: 0px;
 	z-index: 50;
+	font-family: Arial;
 }
 
-.toolbar {
-}
 
 
 div.lessonlist {
@@ -16,12 +27,17 @@ div.lessonlist {
 	margin-left: 0;
 	padding-left: 20px;
 	max-width: 400px;
-	z-index:40;
+	z-index:4;
 	
 }
 
-div.lessonbox {
-	margin-bottom: 10px;
+.lessonbox {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-bottom: 0.5rem;
+	max-width: 800px;
+	background-color: #ffffffee; 
+	
 }
 
 div.lessondate {
@@ -43,6 +59,3 @@ mat-divider {
 	margin-bottom: 10px;
 }
 
-mat-toolbar {
-	color: accent;
-}
