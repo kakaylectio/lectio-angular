@@ -6,28 +6,3 @@ div.prodname {
 	
 }
 
-.notebook-topbar {
-	background-color:  var(--notebook-bg-color);
-	position: sticky;
-	top: 0px;
-	z-index: 6;
-}
-
-.notebook-header {
-	max-width: 800px;
-	
-}
-
-.notebook-title {
-	font-family: 'Satisfy';
-	margin-top: 2%;
-	margin-left: 1rem;
-	font-size: xx-large;
-	color: var(--notebook-contrast-color);
-}
-
-
-mat-icon {
-	font-size: medium;
-	style: regular;
-}

@@ -1,9 +1,34 @@
+div.prodname {
+	font-size: small;
+	color: var(--lectio-light-text);
+	margin-left: 1rem;
+	padding-top: 0.5rem;
+	
+}
+
+
+
+.notebook-topbar {
+	background-color:  var(--notebook-bg-color);
+	position: sticky;
+	top: 0rem;
+	z-index: 5;
+	width: 100%;
+	
+}
+
+.notebook-title {
+	font-size: large;
+	font-family: Arial;
+	font-weight: bold;
+	margin-right: 2rem;
+	color: var(--notebook-contrast-color);
+}
+
+
 .topic-history-header {
 	color: var(--notebook-contrast-color);
-	position: sticky;
-	top: 5rem;
-	z-index: 5;
-	background-color:  var(--notebook-bg-color);
+	max-width: 800px;
 }
 
 .topic-history {
@@ -11,12 +36,10 @@
 	padding-bottom: 1rem;
 }
 
+
 .topicname {
-	text-align: center;
+	text-align: left;
 	font-size: large;
-	font-weight: bold;
-	top: 0px;
-	z-index: 50;
 	font-family: Arial;
 }
 
@@ -59,3 +82,8 @@ mat-divider {
 	margin-bottom: 10px;
 }
 
+.loadButtonContainer {
+		max-width: 800px;
+		color: var(--notebook-contrast-color);
+	
+}

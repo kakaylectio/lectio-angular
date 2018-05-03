@@ -39,18 +39,6 @@ export class NotebookLessonsComponent implements OnInit {
   
   ngOnInit() {
 	  
-      this.notebookService.getNotebookRep().subscribe(notebookRep => {
-    	  if (notebookRep) {
-	          this.notebookId = notebookRep.notebook.id;
-	          console.log("Notebook-lessons has params = " + JSON.stringify(this.notebookId));
-			  this.showTopicsWithLesson(this.notebookId);
-	    	 }
-
-      });
-  }
-  
-  
-  showTopicsWithLesson(notebookId: number) {
 	  this.notebookRepSubscription = this.notebookService.getNotebookRep()
 	  	.subscribe(response => 
 	  		{
@@ -67,6 +55,42 @@ export class NotebookLessonsComponent implements OnInit {
 	  			console.log("Error getting active topics with lessons. " + JSON.stringify(error.error));
 	  		}
 	  	);
+  }
+  
+  newTopicClicked(preError: string) : void {
+	  const dialogConfig = new MatDialogConfig();
+	  dialogConfig.autoFocus = true;
+	  dialogConfig.data = {preError: preError };
+	  console.log(JSON.stringify(dialogConfig));
+	  const dialogRef = this.dialog.open(NewTopicDialogComponent, dialogConfig);
+	  dialogRef.afterClosed().subscribe(
+			  data => {
+				  if (data) {
+					  if (data.topicName) {
+						  let subscription : Subscription;
+						  subscription = this.notebookService.getTopicCreateError().subscribe(
+								  
+								  error => {
+									  subscription.unsubscribe();
+									  console.log(JSON.stringify(error));
+									  console.log("error.status = " + error.status);
+									  if (error.status){
+										  if (error.status == 409) {
+											  // Constraint violation.  Reopen the dialog with the error message.
+											  this.newTopicClicked(error.error);
+											  return;
+										  }
+									  }
+									  console.log( error.message);
+								  }
+								  );
+						  this.notebookService.createTopic(data.topicName);
+					  }
+			  	  }
+			  }
+
+	  );
+
   }
   
   rescanTopicList() {

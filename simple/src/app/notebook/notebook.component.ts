@@ -26,16 +26,6 @@ export class NotebookComponent implements OnInit {
 		  private dialog: MatDialog) { }
 
   ngOnInit() {
-	  console.log("Notebook ngOnInit");
-	  this.notebookRepSubscription = this.notebookService.getNotebookRep().subscribe(
-    		  notebookRep => {
-    			  if (notebookRep) {
-	    			  this.notebook = notebookRep.notebook;
-	    			  this.role = notebookRep.userRole;
-    			  }
-    		  },
-    		  error => {console.log("Error in notebookService.");}
-    	);
 
 	  this.route.params.subscribe(params => {
     	  console.log(JSON.stringify(params));
@@ -47,47 +37,7 @@ export class NotebookComponent implements OnInit {
     		  
   }
   
-  newTopicClicked(preError: string) : void {
-	  
-	  console.log("subscription.closed is " + this.notebookRepSubscription.closed);
-	  console.log("newTopicClicked preError = " + preError);
-	  const dialogConfig = new MatDialogConfig();
-	  dialogConfig.autoFocus = true;
-	  dialogConfig.data = {preError: preError };
-	  console.log(JSON.stringify(dialogConfig));
-	  const dialogRef = this.dialog.open(NewTopicDialogComponent, dialogConfig);
-	  dialogRef.afterClosed().subscribe(
-			  data => {
-				  if (data) {
-					  if (data.topicName) {
-						  let subscription : Subscription;
-						  subscription = this.notebookService.getTopicCreateError().subscribe(
-								  
-								  errorMsg => {
-									  subscription.unsubscribe();
-									  this.newTopicClicked(errorMsg);}
-								  );
-						  this.notebookService.createTopic(data.topicName);
-				//		  .subscribe(
-				//		     createTopicData => {
-				//		    	 this.topicList.splice(0, 0, createTopicData);
-				//		     },
-				//		     createTopicError => {
-				//		    	 if (createTopicError.status) {
-				//		    		 if (createTopicError.status == 409) {
-				//		    			 if (createTopicError.error) {
-				//		    				 this.newTopicClicked(createTopicError.error);
-				//		    			 }
-				//		    		 }
-				//		    	 }
-				//		    	 console.log("Create topic had an error. ", JSON.stringify(createTopicError));
-				//		     }
-				//		  );
-					  }
-			  	  }
-			  }
-	  );
-  }
+
   
 
 }

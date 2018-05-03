@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { NotebookRep, Notebook, Topic } from '../model/lectio-model.module';
 import { LectioBackendService } from '../lectio-backend.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class NotebookService {
@@ -10,7 +11,7 @@ export class NotebookService {
 	notebookId: number;
 	notebookRep : NotebookRep;
 	notebookRepObservable: BehaviorSubject<NotebookRep> = new BehaviorSubject<NotebookRep>(null);
-	topicCreateErrorObservable: Subject<string> = new Subject<string>();
+	topicCreateErrorObservable: Subject<any> = new Subject<any>();
 	
 	constructor(private lectioBackendService : LectioBackendService) {
 	}
@@ -33,12 +34,23 @@ export class NotebookService {
 	}
 	
 	
-	getTopicCreateError() : Observable<string> {
+	getTopicCreateError() : Observable<any> {
 		return this.topicCreateErrorObservable;
 	}
 	
 	getNotebookRep() : Observable<NotebookRep> {
 		return this.notebookRepObservable;
+	}
+	
+	// Returns true if notebookId matches this.notebook.id.
+	// Call checkNotebook and only call setNotebookId if this function
+	// returns true if you don't want to make unnecessary calls to the
+	// database.
+	checkNotebook (notebookId : number) : boolean {
+		if (!this.notebookRep) {
+			return false;
+		}
+		return (this.notebookRep.notebook.id == notebookId);
 	}
 	
 	createTopic(topicName:string) : void {
@@ -49,7 +61,8 @@ export class NotebookService {
 					this.notebookRepObservable.next(this.notebookRep);
 				},
 				createTopicError => {
-					this.topicCreateErrorObservable.next(createTopicError.error);
+					console.log(JSON.stringify(createTopicError));
+					this.topicCreateErrorObservable.next(createTopicError);
 				}
 		);
 	}

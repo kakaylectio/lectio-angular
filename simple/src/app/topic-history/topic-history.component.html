@@ -1,10 +1,15 @@
 <div class="topic-history" fxLayout="column" fxLayoutAlign=" stretch">
-	<div class="topic-history-header lectio-theme notebook-theme" *ngIf="topic" fxLayout="row" fxLayoutAlign=" center">
-		<button mat-icon-button class="lectio-theme notebook-theme" (click)="clickBack();">
-			<mat-icon class="material-icons lectio-theme notebook-theme" >arrow_back</mat-icon>
-		</button>
-		
-		<div class="topicname" fxFlex >{{topic.name}}</div>
+	<div class="notebook-topbar notebook-theme lectio-theme">
+		<div class="prodname lectio-theme">Lectio</div>
+		<div class="topic-history-header lectio-theme notebook-theme" *ngIf="topic" fxLayout="row" fxLayoutAlign=" center">
+			<button mat-icon-button class="lectio-theme notebook-theme" (click)="clickBack();">
+				<mat-icon class="material-icons lectio-theme notebook-theme" >arrow_back</mat-icon>
+			</button>
+			<div class="notebook-header notebook-theme lectio-theme" fxLayout="row">
+				<div class="notebook-title notebook-theme" *ngIf="notebook" fxFlex>{{notebook.name}}</div>
+			</div>
+			<div class="topicname" fxFlex >{{topic.name}}</div>
+		</div>
 	</div>
 	<div class="lessonlist" fxLayout="column" fxLayoutAlign=" stretch">
 		<mat-card class="lessonbox" *ngFor="let lesson of lessonList" fxLayout="column">

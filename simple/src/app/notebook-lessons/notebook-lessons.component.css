@@ -1,3 +1,13 @@
+div.prodname {
+	font-size: small;
+	color: var(--lectio-light-text);
+	margin-left: 1rem;
+	padding-top: 0.5rem;
+	
+}
+
+
+
 .notebook-topbar {
 	background-color:  var(--notebook-bg-color);
 	position: sticky;
@@ -25,3 +35,32 @@ mat-icon {
 	style: regular;
 }
 
+.notebook-topbar {
+	background-color:  var(--notebook-bg-color);
+	position: sticky;
+	top: 0px;
+	z-index: 6;
+}
+
+.notebook-header {
+	max-width: 800px;
+	
+}
+
+.notebook-title {
+	font-family: 'Satisfy';
+	margin-top: 2%;
+	margin-left: 1rem;
+	font-size: xx-large;
+	color: var(--notebook-contrast-color);
+}
+
+.notebook-view {
+	padding-bottom: 1rem;
+}
+
+mat-icon {
+	font-size: medium;
+	style: regular;
+	color: var(--notebook-contrast-color);
+}

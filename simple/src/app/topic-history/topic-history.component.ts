@@ -7,7 +7,7 @@ import { LectioBackendService } from '../lectio-backend.service';
 import { TopicCacheService } from '../topic-cache.service';
 import {Location} from '@angular/common';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
-import { Topic, Lesson } from '../model/lectio-model.module';
+import { Topic, Lesson, Notebook } from '../model/lectio-model.module';
 import { NotebookService } from '../notebook/notebook.service';
 
 @Component({
@@ -20,10 +20,10 @@ export class TopicHistoryComponent implements OnInit {
   @Input() topic : Topic;
   hasMoreLessons : boolean;
   lessonList : Lesson[];
+  notebook : Notebook;
 
   constructor(  private route: ActivatedRoute,
 		  private router: Router,
-		  private lectioBackendService : LectioBackendService,
 		  private topicCacheService : TopicCacheService ,
 		  private notebookService: NotebookService,
 		  private _location: Location) { 
@@ -36,18 +36,52 @@ export class TopicHistoryComponent implements OnInit {
 		  this.fillList(this.topic.id);
 	  }
 	  else {
+		  this.route.parent.params.subscribe(
+				  parentParams => {
+					  let notebookId = parentParams['notebookId'];
+					  console.log("notebookId in ngOnInit = ", notebookId);
+					  if (!this.notebookService.checkNotebook(notebookId)) {
+						  this.notebookService.setNotebookId(notebookId);
+					  }
+					  this.fillTitle();
+			  
+				  },
+				  error => {
+					  console.log("Error getting parent parameters.");
+				  }
+		  );
 		  this.route.params.subscribe(params => {
-			  console.log('TopicHistoryComponent route params');
-	    	  let topicId : number;
+			  console.log('TopicHistoryComponent route params' + JSON.stringify(params));
+
+			  
+			  
+			  let topicId : number;
 	    	  topicId = params['topicId'];
 	    	  this.fillList(topicId);
+	    	  
 	      });
 	  }
 	  
   }
   
+  
+  
   loadMoreLessons() : void {
 	  this.topicCacheService.loadMoreLessons();
+  };
+  
+  
+  fillTitle() : void {
+	 
+	  this.notebookService.getNotebookRep().subscribe(
+			  notebookRep => {
+				  if (notebookRep) {
+					  this.notebook = notebookRep.notebook;
+				  }
+			  },
+			  error => {
+				  console.log("Error retrieving notebook.");
+			  });
   }
   
   fillList(topicId : number) : void{
