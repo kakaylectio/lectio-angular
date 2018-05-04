@@ -4,8 +4,10 @@ import { NotebookLessonsComponent } from './notebook-lessons/notebook-lessons.co
 import { HomeComponent } from './home/home.component';
 import { TopicHistoryComponent } from './topic-history/topic-history.component';
 import { TopicCacheService } from './topic-cache.service';
+import { LoginComponent } from './login/login.component';
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
+	{ path: 'login', component: LoginComponent },
 //	{ path: 'notebookview/:notebookId', component: NotebookLessonsComponent },
 	{
 		path: 'notebook/:notebookId', 

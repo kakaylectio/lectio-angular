@@ -7,8 +7,8 @@ div.prodname {
 }
 
 div.app {
-#	background-image: url('/assets/backgrounds/flowers-3352371_1920.jpg');
-	background-color: DarkSlateGray;
+#	background-image: url('/assets/notebook-backgrounds/flowers-3352371_1920.jpg');
+#	background-color: DarkSlateGray;
 	background-size:  cover;
 	width: 100%;
 	min-height: 100vh;

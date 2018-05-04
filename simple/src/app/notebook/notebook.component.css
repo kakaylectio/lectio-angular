@@ -3,6 +3,10 @@ div.prodname {
 	color: var(--lectio-light-text);
 	margin-left: 1rem;
 	padding-top: 0.5rem;
-	
 }
 
+.notebook-view {
+	background-color: var(--notebook-bg-color);
+	background-size: cover;
+	
+}

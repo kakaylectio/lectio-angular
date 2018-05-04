@@ -1,0 +1,24 @@
+.loginpage {
+	background-image: url('/assets/login-backgrounds/pencil_1280.png');
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	
+}
+
+.loginbox {
+	width:  20rem;
+	height: 20rem;
+	background-color: white;
+	
+	border-width: 3px;
+	border-color:  seagreen;
+	border-style: solid;
+	border-radius: 2rem;
+	
+}
+
+.productname {
+	margin-top: 0.5rem;
+	margin-bottom: 5rem;
+}
