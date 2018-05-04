@@ -39,8 +39,6 @@ export class HomeComponent implements OnInit {
 				  console.log("Error getting user notebooks. " + error.error);
 			  }
 	  );
-	  
-	  
   }
 
 }
