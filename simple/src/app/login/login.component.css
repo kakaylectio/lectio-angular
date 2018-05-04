@@ -7,7 +7,7 @@
 }
 
 .loginbox {
-	width:  20rem;
+	width:  25rem;
 	height: 20rem;
 	background-color: white;
 	
@@ -34,9 +34,15 @@
 	font-size: large;
 }
 
-.loginfield {
-	margin-top: 1rem;
+.loginrow {
+	width: 100%;
+	min-width: 18rem;
 }
+.loginfield {
+	margin-top: 0.75rem;
+	width: 100%;
+}
+
 
 .loginbutton {
 	background-color: var(--lectio-color-main);
