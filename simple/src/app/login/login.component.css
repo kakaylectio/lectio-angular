@@ -12,7 +12,7 @@
 	background-color: white;
 	
 	border-width: 3px;
-	border-color:  seagreen;
+	border-color:  var(--lectio-color-main);
 	border-style: solid;
 	border-radius: 2rem;
 	
@@ -20,5 +20,24 @@
 
 .productname {
 	margin-top: 0.5rem;
-	margin-bottom: 5rem;
+	margin-bottom: 1rem;
+	
+	font-family: Satisfy;
+	font-size: small;
+	color:  var(--lectio-color-main);
+
+
+}
+
+.loginword {
+	font-family: Roboto;
+	font-size: large;
+}
+
+.loginfield {
+	margin-top: 1rem;
+}
+
+.loginbutton {
+	background-color: var(--lectio-color-main);
 }

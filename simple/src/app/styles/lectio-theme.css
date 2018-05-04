@@ -7,4 +7,6 @@
 .lectio-theme {
 	--lectio-dark-text: black;
 	--lectio-light-text: lightskyblue;
+	--lectio-color-main: tomato;
+	--lectio-color-contrast: midnightblue;
 }
