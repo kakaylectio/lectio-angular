@@ -1,16 +1,12 @@
-.lesson-editor {
-	
-}
 
 mat-icon.lesson-action{
 	font-size: xx-large;
 	color: gray;
 }
-mat-card {
-	margin-left: 1rem;
-	margin-right: 1rem;
+.lesson-card {
+	margin: auto;
 	margin-bottom: 0.5rem;
-	max-width: 800px;
+	max-width: var(--view-card-max-width);
 	background-color: #ffffffee; 
 }
 

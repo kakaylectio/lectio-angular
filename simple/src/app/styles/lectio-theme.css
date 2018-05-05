@@ -10,3 +10,8 @@
 	--lectio-color-main: tomato;
 	--lectio-color-contrast: midnightblue;
 }
+
+.lectio-view {
+	--view-card-max-width: 40rem;
+	--view-notebook-max-width: 60rem;
+}

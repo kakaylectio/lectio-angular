@@ -1,15 +1,16 @@
-
+.notebook-lesson {
+}
 
 
 .notebook-topbar {
 	background-color:  var(--notebook-bg-color);
 	position: sticky;
-	top: 1.5rem;
+	top: 0;
 	z-index: 2;
 }
 
 .notebook-header {
-	max-width: 800px;
+	max-width: var(--view-card-max-width);
 	
 }
 
@@ -48,9 +49,6 @@ mat-icon {
 	color: var(--notebook-contrast-color);
 }
 
-.notebook-view {
-	padding-bottom: 1rem;
-}
 
 mat-icon {
 	font-size: medium;

@@ -1,6 +1,6 @@
 <div class="top-user-bar lectio-theme" fxLayout="row" fxLayoutAlign="space-between start">
-		<div class="prodname lectio-theme" fxFlex="nogrow">Lectio</div>
-		<div class="username lectio-theme" fxFlex *ngIf="user" fxLayout="row" fxLayoutAlign="end start">
+		<div class="prodname lectio-theme lectio-view" fxFlex="nogrow">Lectio</div>
+		<div class="username lectio-theme lectio-view" fxFlex *ngIf="user" fxLayout="row" fxLayoutAlign="end start">
 			<button mat-button [matMenuTriggerFor]="usermenu">{{user.name}}</button>
 			<mat-menu #usermenu="matMenu">
 				<button mat-menu-item (click)="onLogoutClicked()">Log Out</button>

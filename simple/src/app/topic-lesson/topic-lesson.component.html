@@ -1,11 +1,11 @@
-<mat-card class="lesson-editor" fxLayout="column">
-	<div class="card-header" >
-		<mat-card-title class="topicname" fxFlex>{{topic.name}}</mat-card-title>
+<mat-card class="lesson-card" fxLayout="column">
+	<div class="card-header notebook-theme lectio-theme lectio-view" >
+		<mat-card-title class="topicname notebook-theme lectio-theme lectio-view" fxFlex>{{topic.name}}</mat-card-title>
 	</div>
 	
 	<mat-card-content>
-	<div class="editsection" *ngIf="editingLesson">
-		<div class="lesson-heading" fxLayout="row" fxFill fxLayoutAlign=" end">
+	<div class="editsection notebook-theme lectio-theme lectio-view" *ngIf="editingLesson">
+		<div class="lesson-heading notebook-theme lectio-theme lectio-view" fxLayout="row" fxFill fxLayoutAlign=" end">
 			<div class="lesson-note-date" *ngIf="editingLesson.date">
 				{{editingLesson.date | arrayToDate | date}}
 			</div>

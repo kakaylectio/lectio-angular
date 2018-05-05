@@ -1,13 +1,13 @@
 <div class="loginpage" fxLayout="column" fxLayoutAlign="center center">
   
-	<div class="loginbox lectio-theme" fxLayout="column" fxLayoutAlign="start center">
+	<div class="loginbox lectio-theme lectio-view" fxLayout="column" fxLayoutAlign="start center">
 	
-		<div class="productname lectio-theme">Lectio</div>
-		<div class="loginword lectio-theme">Log In</div>
+		<div class="productname lectio-theme lectio-view">Lectio</div>
+		<div class="loginword lectio-theme lectio-view">Log In</div>
 		
 		<form #loginForm="ngForm" fxLayout="column" fxLayoutAlign="start center">
-			<mat-form-field class="emailrow loginrow lectio-theme">
-				<label class="form-control emaillabel loginlabel lectio-theme">Email</label>
+			<mat-form-field class="emailrow loginrow lectio-theme lectio-view">
+				<label class="form-control emaillabel loginlabel lectio-theme lectio-view">Email</label>
 				<input matInput 
 					id="emailInput" 
 					[(ngModel)]="email" 
@@ -19,18 +19,18 @@
 					type="email"
 					/>
 			</mat-form-field>
-			<mat-form-field class="passwordrow loginrow lectio-theme">
-				<span class="passwordlabel loginlabel lectio-theme">Password</span>
+			<mat-form-field class="passwordrow loginrow lectio-theme lectio-view">
+				<span class="passwordlabel loginlabel lectio-theme lectio-view">Password</span>
 				<input matInput 
 					id="passwordInput" 
 					[(ngModel)]="password" 
 					name="passwordInput"
 					#passwordInput="ngModel"
 					required 
-					class="passwordfield loginfield lectio-theme" 
+					class="passwordfield loginfield lectio-theme lectio-view" 
 					type="password"/>
 			</mat-form-field>
-			<button mat-button class="loginbutton lectio-theme"
+			<button mat-button class="loginbutton lectio-theme lectio-view"
 				(click)="login()"
 				[disabled]="!loginForm.form.valid "
 				>

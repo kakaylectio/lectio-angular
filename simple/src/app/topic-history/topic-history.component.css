@@ -29,7 +29,7 @@ div.prodname {
 
 .topic-history-header {
 	color: var(--notebook-contrast-color);
-	max-width: 800px;
+	max-width: var(--view-card-max-width);
 }
 
 .topic-history {
@@ -48,9 +48,9 @@ div.prodname {
 
 div.lessonlist {
 	padding-top: 20px;
-	margin-left: 0;
+	margin: auto;
 	padding-left: 20px;
-	max-width: 400px;
+	max-width: var(--view-card-max-width);
 	z-index:4;
 	
 }
@@ -59,7 +59,7 @@ div.lessonlist {
 	margin-left: 1rem;
 	margin-right: 1rem;
 	margin-bottom: 0.5rem;
-	max-width: 800px;
+	max-width: var(--view-card-max-width);
 	background-color: #ffffffee; 
 	
 }
@@ -84,7 +84,7 @@ mat-divider {
 }
 
 .loadButtonContainer {
-		max-width: 800px;
+		width: 100%;
 		color: var(--notebook-contrast-color);
 	
 }
