@@ -19,10 +19,11 @@ div.prodname {
 
 .notebook-title {
 	font-size: large;
-	font-family: Arial;
-	font-weight: bold;
+	font-family: Satisfy;
+	font-weight: regular;
 	margin-right: 2rem;
 	color: var(--notebook-contrast-color);
+	
 }
 
 
@@ -40,7 +41,7 @@ div.prodname {
 .topicname {
 	text-align: left;
 	font-size: large;
-	font-family: Arial;
+	font-family: Roboto;
 }
 
 

@@ -8,5 +8,6 @@ div.prodname {
 .notebook-view {
 	background-color: var(--notebook-bg-color);
 	background-size: cover;
+	height: 100vh;
 	
 }
