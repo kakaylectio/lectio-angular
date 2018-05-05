@@ -31,16 +31,16 @@
 	</div>
 	<div *ngIf="!isStaticLessonVisible && lastLesson" fxLayout="column" >
 		<div class="lesson-heading" fxLayout="row" fxFill >
-			<div  class="lesson-note-date" fxFlex>
+			<div   fxFlex>
 			</div>
-			<button mat-icon-button *ngIf="editingLesson" fxFlex="8" matToolTip="Show last lesson" (click)="expandButtonClicked();"
-			    aria-label="Hide this lesson">
-				<mat-icon class="material-icons" >expand_more</mat-icon>
-			</button>
 		</div>
 	</div> 
 	</mat-card-content>
 	<mat-card-footer fxLayout="row" fxLayoutAlign="end">
+		<button mat-icon-button *ngIf="editingLesson && !isStaticLessonVisible && lastLesson" fxFlex="8" matToolTip="Show last lesson" (click)="expandButtonClicked();"
+		    aria-label="Hide this lesson">
+			<mat-icon class="material-icons" >expand_more</mat-icon>
+		</button>
 		<button mat-icon-button *ngIf="!editingLesson && role == 'teacher'"  matToolTip="New Note" (click)="editButtonClicked();">
 				<mat-icon class="lesson-action material-icons" >note_add</mat-icon>
 		</button>
