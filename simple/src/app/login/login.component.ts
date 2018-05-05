@@ -20,19 +20,24 @@ export class LoginComponent implements OnInit {
 		  private router:  Router) { }
 
   ngOnInit() {
+	  this.loginService.getUserObservable().subscribe(
+			  user => { this.onUserLoggedIn(user);},
+			  error => {console.log("Error logging in." + JSON.stringify(error));}
+			  );
   }
 
   login() {
 	  console.log("Log in email = " + this.email + " password = " + this.password);
-	  this.loginService.login(this.email, this.password, this.onUserLoggedIn);
+	  this.loginService.login(this.email, this.password);
 
   }
   
   onUserLoggedIn = (user:User) => 
   {
+	  if (user) {
 	  // For now, assume that the user has access to only one notebook
 	  // and go into that notebook.
-	  this.backendService.getUserNotebooks ().subscribe(
+	  this.backendService.getUserNotebooks().subscribe(
 			  data => {
 				 if (data.length > 0) {
 					 let notebookRep : NotebookRep;
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
 				  console.log("Error getting user notebooks. " + error.error);
 			  }
 	  );
+	  }
 }
 
 }

@@ -93,7 +93,8 @@ export class LoginService {
 	  return new ErrorObservable("Error from http ${error.error}");
   }
 
-  public login(email: string, password: string, callback:(this: void, userParam: User) => void): Observable<LoginResponse> {
+  public login(email: string, password: string//, callback:(this: void, userParam: User) => void
+		  ) {
 	   var emailPassword : EmailPassword;
        emailPassword = new EmailPassword();
    		emailPassword.email = email;
@@ -105,9 +106,8 @@ export class LoginService {
 	  	observable.subscribe(loginResponse => {
 	  				console.log("Response received.");
 	  				if (loginResponse) {
-	  					this.setupUser(loginResponse);
-	  					this.user.email = email;
-	  					callback(this.user);
+	  					this.setupUser(loginResponse, email);
+//	  					callback(this.user);
 	  				}
 	  			},
 	  			error => {
@@ -115,10 +115,9 @@ export class LoginService {
 					this.handleError(error);
 				}
 	  	)
-	  	return observable;
 	  }
   
-  setupUser (loginResponse: LoginResponse) :void{
+  setupUser (loginResponse: LoginResponse, email:string) :void{
 	  if (loginResponse == null) {
 		  localStorage.removeItem('token');
 		  this.user = null;
@@ -132,6 +131,7 @@ export class LoginService {
 			this.user = new User();
 			this.user.name = loginResponse.name;
 			this.user.id = loginResponse.userId;
+			this.user.email = email;
 			this.httpHeaders = new HttpHeaders(
 					{
 					  	'Content-Type': 'application/json',

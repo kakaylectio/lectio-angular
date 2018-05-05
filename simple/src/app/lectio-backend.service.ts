@@ -28,9 +28,15 @@ export class LectioBackendService {
  } 
   
   getUserNotebooks():Observable<NotebookRep[]> {
-	  let userId = this.loginService.getUser().id;
-	  let path = '/lectio/user/' + userId + '/notebooks';
-	  return this.httpClient.get<NotebookRep[]>(this.configUrl + path, this.getHttpOptions());
+	  let user = this.loginService.getUser();
+	  if (user) {
+		  let userId = this.loginService.getUser().id;
+		  let path = '/lectio/user/' + userId + '/notebooks';
+		  return this.httpClient.get<NotebookRep[]>(this.configUrl + path, this.getHttpOptions());
+	  }
+	  else {
+		  return null;
+	  }
   }
   
 
