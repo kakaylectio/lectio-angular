@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { User } from './model/user';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 
 
 class EmailPassword{
@@ -26,6 +27,7 @@ export class LoginService {
   private configUrl: string;
   private user: User;
   private httpHeaders: HttpHeaders;
+  userObservable : BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private httpClient: HttpClient) { 
 	  this.configUrl = 'http://localhost:8888';
@@ -50,7 +52,9 @@ export class LoginService {
 		  });
 		  
 	  }
-	  	
+	  if (this.user != null) {
+		  this.userObservable.next(this.user);
+	  }	
   }
   
   getHttpHeaders() : HttpHeaders  {
@@ -60,6 +64,10 @@ export class LoginService {
   
   getUser(): User {
 	  return this.user;
+  }
+  
+  getUserObservable(): BehaviorSubject<User> {
+	  return this.userObservable;
   }
   
   private getToken(): string {
@@ -77,7 +85,9 @@ export class LoginService {
 		  console.log("Clearing token.");
 		  localStorage.removeItem('token');
 		  this.user = null;
+		  this.userObservable.next(this.user);
 		  return new ErrorObservable("Login failed.");
+		  
 	  }
 
 	  return new ErrorObservable("Error from http ${error.error}");
@@ -129,7 +139,19 @@ export class LoginService {
 					 });
 			console.log("loginResponse.userId = " + loginResponse.userId);
 			console.log("user.id = " + this.user.id);
+    		  this.userObservable.next(this.user);
 	  }
+  }
+  
+  logout() : void {
+		localStorage.removeItem('token');
+		localStorage.removeItem('username');
+		localStorage.removeItem('userid');
+	  	this.httpHeaders = new HttpHeaders();
+
+		
+		this.user = null;
+        this.userObservable.next(this.user);
   }
 		  
 

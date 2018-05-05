@@ -19,7 +19,7 @@ import { LectioNgMatModule } from './lectio-ng-mat/lectio-ng-mat.module';
 import { NewTopicDialogComponent } from './new-topic-dialog/new-topic-dialog.component';
 import { NotebookModule } from './notebook/notebook.module';
 import { LoginComponent } from './login/login.component';
-
+import { LectioCommonModule } from './lectio-common/lectio-common.module';
 
 
 @NgModule({
@@ -42,7 +42,10 @@ import { LoginComponent } from './login/login.component';
 	    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
 	    FlexLayoutModule,
 	    LectioNgMatModule,
+	    LectioCommonModule
  ],
+   exports: [
+   ],
    providers: [
 	  LectioBackendService,
 	  LoginService,

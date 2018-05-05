@@ -4,6 +4,7 @@ import { LoginService } from '../login.service';
 import { LectioBackendService } from '../lectio-backend.service';
 import { NotebookRep, User } from '../model/lectio-model.module';
 import { Router } from '@angular/router';
+import { LectioCommonModule } from '../lectio-common/lectio-common.module';
 
 @Component({
   selector: 'app-login',

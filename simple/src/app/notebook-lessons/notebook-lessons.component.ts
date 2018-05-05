@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 import { NewTopicDialogComponent } from '../new-topic-dialog/new-topic-dialog.component';
 import { NotebookService } from '../notebook/notebook.service';
 import { Subscription } from 'rxjs/Subscription';
+import { TopUserBarComponent } from '../top-user-bar/top-user-bar.component';
 
 @Component({
   selector: 'app-notebook-lessons',
@@ -30,6 +31,7 @@ export class NotebookLessonsComponent implements OnInit {
   
   constructor( 
 		  private lectioBackendService : LectioBackendService,
+		  private router: Router,
 		  private route:  ActivatedRoute, 
 		  private dialog: MatDialog,
 		  private notebookService:  NotebookService ) {
@@ -52,7 +54,13 @@ export class NotebookLessonsComponent implements OnInit {
 	  			}
 	  		},
 	  		error => {
-	  			console.log("Error getting active topics with lessons. " + JSON.stringify(error.error));
+	  			if (error.status == 401) {
+	  				console.log("Unauthorized access.");
+	  				this.router.navigate(['/login']);
+	  			}
+	  			else {
+	  				console.log("Error getting active topics with lessons. " + JSON.stringify(error));
+	  			}
 	  		}
 	  	);
   }
@@ -95,7 +103,6 @@ export class NotebookLessonsComponent implements OnInit {
   
   rescanTopicList() {
 	  console.log("NotebookLessonsComponent.subscription.closed = " + this.notebookRepSubscription.closed);
-	  //this.showTopicsWithLesson(this.notebookId);
   }
   
 

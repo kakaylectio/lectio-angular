@@ -1,0 +1,16 @@
+
+.top-user-bar {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	padding-top: 0.5rem;
+}
+
+.prodname {
+	font-size: small;
+	color: var(--lectio-light-text);
+}
+
+.username {
+	color:  var(--lectio-light-text);
+	text-align: right;
+}

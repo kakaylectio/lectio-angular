@@ -14,6 +14,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NotebookHomeComponent } from './notebook-home/notebook-home.component';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotebookService } from './notebook.service';
+import { LectioCommonModule } from '../lectio-common/lectio-common.module';
 
 @NgModule({
 	  declarations: [
@@ -30,8 +31,9 @@ import { NotebookService } from './notebook.service';
 		    NotebookRoutingModule,
 		    LectioNgMatModule,
 		    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
-		    FlexLayoutModule
-
+		    FlexLayoutModule,
+		    LectioCommonModule
+		    
 		  ],
 	  providers: [
 		  TopicCacheService,

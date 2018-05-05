@@ -29,7 +29,7 @@ export class NotebookService {
 					this.notebookRepObservable.next(this.notebookRep);
 				},
 				error => {
-					console.log("Error getting active topics with lessons.");
+					this.notebookRepObservable.error(error);
 				});
 	}
 	
