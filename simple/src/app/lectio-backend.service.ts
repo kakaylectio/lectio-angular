@@ -81,6 +81,11 @@ export class LectioBackendService {
 	  return this.httpClient.get<Topic>(this.configUrl + path, httpOptions);
   }
   
+  findTopicByIdWithNotebook(topicId:number) : Observable<Topic> {
+	  let path = '/lectio/topic/' + topicId + "/findtopicbyid/withnotebook";
+	  let httpOptions = this.getHttpOptions();
+	  return this.httpClient.get<Topic>(this.configUrl + path, httpOptions);
+  }
   archiveTopic(topicId:number) : Observable<Topic> {
 	  let path = '/lectio/topic/' + topicId + '/archive';
 	  let httpOptions = this.getHttpOptions();

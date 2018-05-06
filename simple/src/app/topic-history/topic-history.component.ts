@@ -21,7 +21,7 @@ export class TopicHistoryComponent implements OnInit {
   hasMoreLessons : boolean;
   lessonList : Lesson[];
   notebook : Notebook;
-
+  
   constructor(  private route: ActivatedRoute,
 		  private router: Router,
 		  private topicCacheService : TopicCacheService ,
@@ -32,33 +32,13 @@ export class TopicHistoryComponent implements OnInit {
 
   ngOnInit() {
 	  if (this.topic) {
-		  console.log("TopicHistoryComponent ngOnInit has topic.");
 		  this.fillList(this.topic.id);
 	  }
 	  else {
-		  this.route.parent.params.subscribe(
-				  parentParams => {
-					  let notebookId = parentParams['notebookId'];
-					  console.log("notebookId in ngOnInit = ", notebookId);
-					  if (!this.notebookService.checkNotebook(notebookId)) {
-						  this.notebookService.setNotebookId(notebookId);
-					  }
-					  this.fillTitle();
-			  
-				  },
-				  error => {
-					  console.log("Error getting parent parameters.");
-				  }
-		  );
 		  this.route.params.subscribe(params => {
-			  console.log('TopicHistoryComponent route params' + JSON.stringify(params));
-
-			  
-			  
 			  let topicId : number;
 	    	  topicId = params['topicId'];
 	    	  this.fillList(topicId);
-	    	  
 	      });
 	  }
 	  
@@ -71,23 +51,12 @@ export class TopicHistoryComponent implements OnInit {
   };
   
   
-  fillTitle() : void {
-	 
-	  this.notebookService.getNotebookRep().subscribe(
-			  notebookRep => {
-				  if (notebookRep) {
-					  this.notebook = notebookRep.notebook;
-				  }
-			  },
-			  error => {
-				  console.log("Error retrieving notebook.");
-			  });
-  }
   
   fillList(topicId : number) : void{
-	  this.topicCacheService.checkTopicId(topicId);
+	  this.topicCacheService.setTopicId(topicId);
 	  this.topicCacheService.getTopicLessonObservable().subscribe(
 			  data => {
+				  this.notebook = data['notebook'];
 				  this.topic = data['topic'];
 				  this.lessonList = data['lessonList'];
 				  this.hasMoreLessons = data['hasMoreLessons'];
@@ -97,7 +66,13 @@ export class TopicHistoryComponent implements OnInit {
   
   
   clickBack():void {
-	  this._location.back();
+	  this.notebookService.getNotebookRep().subscribe( notebookRep => 
+	  		{
+	  			if (notebookRep) {
+	  				this.router.navigate(['notebook', notebookRep.notebook.id]);
+	  			}
+	  		});
+  	  
   }
 
 }

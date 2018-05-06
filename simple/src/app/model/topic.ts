@@ -1,4 +1,5 @@
-import { Lesson } from '../model/lesson';
+import { Lesson } from './lesson';
+import { Notebook } from './notebook';
 
 export class Topic {
   id: number;
@@ -8,4 +9,5 @@ export class Topic {
   dateCreated: string;
   graphic: string;
   lastLessonNote: Lesson;
+  notebook: Notebook;
 }

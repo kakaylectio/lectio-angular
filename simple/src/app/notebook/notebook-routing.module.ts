@@ -16,7 +16,6 @@ const notebookRoutes: Routes = [
 			{ 
 				path: 'topic-history/:topicId', 
 				component: TopicHistoryComponent,
-				
 			}			
 		]
 	}

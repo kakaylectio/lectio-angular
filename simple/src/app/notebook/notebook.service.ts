@@ -25,6 +25,7 @@ export class NotebookService {
 	requestNotebookActiveTopics() : void {
 		this.lectioBackendService.getActiveTopicsWithLessons(this.notebookId).subscribe(
 				data => {
+					console.log("notebook service got notebook");
 					this.notebookRep = data;
 					this.notebookRepObservable.next(this.notebookRep);
 				},

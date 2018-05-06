@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Topic } from './model/topic';
-import { Lesson } from './model/lesson';
+import { Topic, Lesson, Notebook } from './model/lectio-model.module';
 import { Router, Resolve, RouterStateSnapshot,
     ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { LectioBackendService } from './lectio-backend.service';
+import { NotebookService} from './notebook/notebook.service';
 
 // When information about a notebook is retrieved, the last lesson on each topic is also retrieved.
 // Sometimes, when the last lesson is at today's date, the second last lesson is already retrieved.
@@ -25,23 +25,27 @@ export class TopicCacheService {
   private lessonList : Lesson[] = [];
   private lastLesson : Lesson;
   private secondLastLesson : Lesson;
+  private notebook : Notebook;
   
   // nextLesson is retrieved but not pushed as part of the observable because
   // it is used to test whether or not there are more Lessons after the last lesson.
   // If nextLesson is null, that means there are no more lessons.
   private nextLesson : Lesson;  
   
-  private topicObservable : BehaviorSubject <{topic : Topic, lessonList: Lesson[], hasMoreLessons : boolean}> 
+  private topicObservable : BehaviorSubject <{topic : Topic, lessonList: Lesson[], hasMoreLessons : boolean, notebook : Notebook}> 
 	  = new BehaviorSubject(
-		  {topic: undefined, 
+		  {
+		  topic: undefined, 
 		  lessonList: [],
-		  hasMoreLessons: false}
+		  hasMoreLessons: false,
+		  notebook : undefined}
 	  );
 	
-  constructor(private lectioBackendService : LectioBackendService) { }
+  constructor(private lectioBackendService : LectioBackendService,
+		  private notebookService: NotebookService) { }
   
   // Checks that this service is set to the right topic.  If not, then change topic.
-  checkTopicId(topicId : number) {
+  setTopicId(topicId : number) {
   	if (this.topic) {
   		if (this.topic.id == topicId) {
   			// This service is already set to the correct ID.  So return.
@@ -50,30 +54,52 @@ export class TopicCacheService {
   	}
   	
   	// This service is not set to the right topic.  So find the topic and set up the service.
-	this.lectioBackendService.findTopicById(topicId).subscribe(data =>{
-			 	this.setData(data, null, null);
-	 		},
-			 error => {
-			 	console.log("Error finding topic by ID " + topicId);
-			 });
-  	
+	this.lectioBackendService.findTopicByIdWithNotebook(topicId).subscribe(
+		data =>{
+			console.log("topicCacheService calling lectioBackendService.findTopicById = " +JSON.stringify(data));
+			this.setData(data, null, null);
+ 		},
+		 error => {
+		 	console.log("Error finding topic by ID " + topicId);
+		 });
+
   }
   
-  setData ( theTopic : Topic, theLastLesson : Lesson, theSecondLastLesson : Lesson ) : void {
+  setData (  theTopic : Topic, theLastLesson : Lesson, theSecondLastLesson : Lesson ) : void {
 	  this.topic = theTopic;
-	  this.lessonList = []; 
-	  if (theLastLesson) {
-	     this.lessonList.push(theLastLesson);
-	  }
-	  if (theSecondLastLesson) {
-	  	  this.lessonList.push(theSecondLastLesson);
-	  }
-	  this.topicObservable.next({topic: this.topic, lessonList: this.lessonList, hasMoreLessons: true});
-	  this.loadMoreLessons();
-	  
-	  this.lastLesson = theLastLesson;
-	  this.secondLastLesson = theSecondLastLesson;
-	 
+
+	  this.notebookService.getNotebookRep().subscribe( 
+		  notebookRep=> {
+			  // Make sure the topic is in sync with the notebook in NotebookService.
+			  if (notebookRep) {
+				  console.log("topic-cache-service ")
+				  console.log("  notebookService.notebookRep.notebook.id = " + this.notebookService.notebookRep.notebook.id);
+				  console.log("  theTopic.notebook = " + theTopic.notebook);
+				  this.notebook = notebookRep.notebook;
+				  if (theTopic.notebook.id != notebookRep.notebook.id) {
+					  this.topicObservable.error("Wrong URL containing notebook ID " + notebookRep.notebook.id + " and topic ID " 
+							  + theTopic.id + " combination.");
+					  return;
+				  }
+				  
+				  this.lessonList = []; 
+				  if (theLastLesson) {
+				     this.lessonList.push(theLastLesson);
+				  }
+				  if (theSecondLastLesson) {
+				  	  this.lessonList.push(theSecondLastLesson);
+				  }
+				  this.topicObservable.next({topic: this.topic, lessonList: this.lessonList, hasMoreLessons: true, notebook: this.notebook});
+				  this.loadMoreLessons();
+				  
+				  this.lastLesson = theLastLesson;
+				  this.secondLastLesson = theSecondLastLesson;
+			  }
+		  },
+	      error => {
+	    	  this.topicObservable.error(error);
+	      });
+
   }
   
   getTopicLessonObservable() {
@@ -92,11 +118,12 @@ export class TopicCacheService {
 					 this.nextLesson = lesson;
 				 }
 			 });// End of forEach
-			 console.log("Has more lessons is " + this.nextLesson == null);
 			 this.topicObservable.next({
 			 	topic: this.topic, 
 			 	lessonList : this.lessonList, 
-			 	hasMoreLessons: !(this.nextLesson == null)});
+			 	hasMoreLessons: !(this.nextLesson == null),
+			 	notebook: this.notebook});
+				
 		 },  // end of data=>
 		 error => {
 			 console.log("Error retrieving more lessons.");

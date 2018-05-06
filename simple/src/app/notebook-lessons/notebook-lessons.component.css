@@ -10,8 +10,6 @@
 }
 
 .notebook-header {
-	max-width: var(--view-card-max-width);
-	
 }
 
 .notebook-title {
@@ -37,7 +35,6 @@ mat-icon {
 }
 
 .notebook-header {
-	max-width: 800px;
 	
 }
 

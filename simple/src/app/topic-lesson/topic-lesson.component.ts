@@ -6,7 +6,7 @@ import { TopicCacheService } from '../topic-cache.service';
 import { ArrayToDatePipe } from '../util/array-to-date.pipe';
 import { LectioNgMatModule } from '../lectio-ng-mat/lectio-ng-mat.module';
 import { NotebookLessonsComponent } from '../notebook-lessons/notebook-lessons.component';
-import { Topic, Lesson } from '../model/lectio-model.module';
+import { Topic, Lesson, Notebook } from '../model/lectio-model.module';
 import { NotebookService } from '../notebook/notebook.service';
 @Component({
   selector: 'app-topic-lesson',
@@ -33,6 +33,7 @@ export class TopicLessonComponent implements OnInit {
   lastLesson : Lesson;
   isStaticLessonVisible : boolean;
   editingContent : string;
+  private notebook: Notebook;
   
   constructor( private lectioBackendService : LectioBackendService , private froalaEditorModule : FroalaEditorModule,
 		  private router : Router,
@@ -162,13 +163,14 @@ export class TopicLessonComponent implements OnInit {
   }
   
   public historyButtonClicked() : void {
+	  this.topic.notebook = this.notebookService.notebookRep.notebook;
 	  if (this.editingLesson) {
-		  this.topicCacheService.setData(this.topic, this.editingLesson, this.lastLesson );
+		  this.topicCacheService.setData( this.topic, this.editingLesson, this.lastLesson );
 	  }
 	  else {
 		  this.topicCacheService.setData(this.topic, this.lastLesson, undefined);
 	  }
-      this.router.navigate(['notebook', this.parentView.notebook.id, 'topic-history', this.topic.id]);
+      this.router.navigate(['notebook',this.parentView.notebook.id,'topic-history', this.topic.id]);
 
   }
   
