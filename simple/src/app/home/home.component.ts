@@ -45,11 +45,10 @@ export class HomeComponent implements OnInit {
 				 	 notebookRep = data[0];
 				 	 console.log("The notebook id is " + notebookRep.notebook.id);
 				 	 this.router.navigate(['/notebook', notebookRep.notebook.id]);
-				 	 console.log("navigated");
 				 } 
 			  },
 			  error => {
-				  console.log("Error getting user notebooks. " + error.error);
+				  console.log("Error getting user notebooks. " + JSON.stringify(error));
 			  }
 	  );
     	 }

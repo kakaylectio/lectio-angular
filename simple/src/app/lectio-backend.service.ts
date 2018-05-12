@@ -16,7 +16,7 @@ export class LectioBackendService {
 
  
   constructor(private httpClient: HttpClient, private loginService: LoginService) {
-	  this.configUrl = 'http://localhost:8888';
+	  this.configUrl = 'https://localhost:8889';
 	  this.username = 'aral@vorkosigan.com';
 	  this.password = 'cordelia';
   }

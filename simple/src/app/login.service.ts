@@ -30,7 +30,7 @@ export class LoginService {
   userObservable : BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private httpClient: HttpClient) { 
-	  this.configUrl = 'http://localhost:8888';
+	  this.configUrl = 'https://localhost:8889';
 	  
 	  let username = localStorage.getItem('username');
 	  let userid = localStorage.getItem('userid');
